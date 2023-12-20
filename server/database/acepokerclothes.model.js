@@ -14,6 +14,6 @@ const AceMaterialModel = new Schema({
   image: ImageSchema
 });
 
-const JumboPokerClothes = model("Ace Poker Clothes Model", AceMaterialModel)
+const AcePokerClothes = model("Ace Poker Clothes Model", AceMaterialModel)
 
-module.exports = JumboPokerClothes;
+module.exports = AcePokerClothes;

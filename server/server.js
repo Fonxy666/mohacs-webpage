@@ -173,11 +173,10 @@ app.delete("/v1/api/news/:id/delete", async (req, res, next) => {
 //mongoDB connecting
 
 const main = async () => {
+  mongoose.set("strictQuery", false);
   await mongoose.connect(MONGO_URL);
-
   app.listen(PORT, () => {
-    console.log("App is listening on 8080");
-    console.log("Try /api/employees route right now");
+    console.log(`App is listening on ${PORT}.`);
   });
 };
 

@@ -3,7 +3,10 @@ const { Schema, model } = mongoose;
 
 const NewModel = new Schema({
   title: String,
-  date: Date.now,
+  date: {
+    type: Date,
+    default: Date.now
+  },
   message: String
 });
 
