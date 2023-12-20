@@ -4,18 +4,18 @@ import reportWebVitals from './reportWebVitals';
 
 const App = () => {
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <div>Hello world!</div>
-    },
-  ]);
+    const router = createBrowserRouter([
+        {
+        path: "/",
+        element: <div>Hello world!</div>
+        },
+    ]);
 
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router}/>
-    </React.StrictMode>
-  );
+    return (
+        <React.StrictMode>
+        <RouterProvider router={router}/>
+        </React.StrictMode>
+    );
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
