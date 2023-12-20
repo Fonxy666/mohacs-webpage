@@ -14,7 +14,13 @@ export const ContactDivContainer = styled.div`
 export const MapContainer = styled.iframe`
     border-radius: 15px;
     width: 100%;
-    height: 80%;
+    height: 85%;
+    @media only screen and (min-width: 450px) and (max-width: 1000px) {
+        height: 70%;
+    };
+    @media only screen and (max-width: 450px) {
+        height: 60%;
+    };
 `;
 
 export const CardContainer = styled.div`
@@ -29,5 +35,16 @@ export const CardContainer = styled.div`
 `
 
 export const DescriptionContainer = styled.div`
-    height: 20%;
+    height: 15%;
+    @media only screen and (min-width: 450px) and (max-width: 1000px) {
+        height: 30%;
+    };
+    @media only screen and (max-width: 450px) {
+        height: 40%;
+    };
+`
+
+export const StyledText = styled.div`
+    font-weight: 700;
+    height: 30%;
 `

@@ -1,8 +1,30 @@
-import React from 'react';
-import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer } from "../Styles/Contact.Styled";
+import React, { useState, useEffect  } from 'react';
+import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer, StyledText } from "../Styles/Contact.Styled";
 import Navbar from "../Components/Navbar";
 
 const Contact = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+          setWindowWidth(window.innerWidth);
+        };
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
+    const telephoneContent = windowWidth <= 380 ?
+    (
+        <>
+        Telephone: <br/>+(06-20)-222-3333
+        </>
+    ) : (
+        'Telephone: +(06-20)-222-3333'
+    );
+
 
     return (
         <div>
@@ -11,9 +33,9 @@ const Contact = () => {
                 <CardContainer className="card">
                     <div className="card-body">
                         <DescriptionContainer>
-                            <h5 className="card-title">Jumbo poker</h5>
-                            <h5 className="card-title">E-mail: example@example.com</h5>
-                            <h5 className="card-title">Telephone: (06-20)-222-3333</h5>
+                            <StyledText>Jumbo poker</StyledText>
+                            <StyledText>E-mail: example@example.com</StyledText>
+                            <StyledText>{telephoneContent}</StyledText>
                         </DescriptionContainer>
                         <MapContainer
                             id="AcePoker"
@@ -23,9 +45,9 @@ const Contact = () => {
                 <CardContainer className="card">
                     <div className="card-body">
                         <DescriptionContainer>
-                            <h5 className="card-title">Ace poker</h5>
-                            <h5 className="card-title">E-mail: example@example.com</h5>
-                            <h5 className="card-title">Telephone: (06-20)-222-3333</h5>
+                            <StyledText>Ace poker</StyledText>
+                            <StyledText>E-mail: example@example.com</StyledText>
+                            <StyledText>{telephoneContent}</StyledText>
                         </DescriptionContainer>
                         <MapContainer
                             id="JumboPoker"
