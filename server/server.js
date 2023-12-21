@@ -47,16 +47,24 @@ app.post("/v1/api/users/login", async (req, res) => {
     try {
         const query = req.body;
         const registeredUser = await UsersModel.findOne({ userName: query.name });
-        const success = await comparePasswords(query.password, registeredUser.password) && (query.name === registeredUser.userName);
-        res.json({ success, name: registeredUser.userName, _id: registeredUser._id });
+        if (!registeredUser) {
+            res.status(404).json({ success: false, message: "Invalid credentials" });
+            return;
+        }
+        const passwordMatch = await comparePasswords(query.password, registeredUser.password);
+        if (!passwordMatch || query.name !== registeredUser.userName) {
+            res.status(404).json({ success: false, message: "Invalid credentials" });
+            return;
+        }
+        res.json({ success: true, name: registeredUser.userName, _id: registeredUser._id });
     } catch (err) {
-        res.status(500).send('An error occurred during login.');
+        console.error("An error occurred during login:", err);
+        res.status(500).send("An error occurred during login.");
     }
 });
 
 const comparePasswords = async (simplePassword, hashedPassword) => {
     try {
-        console.log(simplePassword, hashedPassword);
         const result = await bcrypt.compare(simplePassword, hashedPassword);
         if (result) {
             return true;
