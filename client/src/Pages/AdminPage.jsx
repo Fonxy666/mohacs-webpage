@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
+import LoginForm from "../Components/LoginForm";
 import { NewsContainer } from "../Styles/News.Styled";
 
 const NewsPage = () => {
@@ -8,7 +9,7 @@ const NewsPage = () => {
     <div>
         <NewsContainer>
             <Navbar/>
-            <div style={{color: "white"}}>Hello Admin</div>
+            <LoginForm/>
         </NewsContainer>
     </div>
   );
