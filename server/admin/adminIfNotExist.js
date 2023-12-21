@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UsersModel = require("../database/user.model");
 const bcrypt = require('bcrypt');
 
-const { MONGO_URL, PORT = 8080 , ADMIN_EMAIL, ADMIN_USERNAME, ADMIN_PASSWORD } = process.env;
+const { MONGO_URL, PORT = 8080 , ADMIN_USERNAME, ADMIN_PASSWORD } = process.env;
 
 if (!MONGO_URL) {
     console.error("Missing MONGO_URL environment variable");
@@ -12,17 +12,17 @@ if (!MONGO_URL) {
 
 const populateWithAdmin = async () => {
     try {
-        const admin = await UsersModel.findOne({ e_mail: ADMIN_EMAIL });
+        const admin = await UsersModel.findOne({ e_mail: ADMIN_USERNAME });
 
         if (admin) {
             console.log("Admin already in the database!");
         } else {
             const hashedAdminPassword = await bcrypt.hash(ADMIN_PASSWORD, 10);
             await UsersModel.create({
-                e_mail: ADMIN_EMAIL,
-                userName: ADMIN_USERNAME,
+                e_mail: "-",
+                username: ADMIN_USERNAME,
                 password: hashedAdminPassword,
-                admin: true
+                role: "Admin"
             });
             console.log('Admin created.');
         }
@@ -33,9 +33,7 @@ const populateWithAdmin = async () => {
 
 const main = async () => {
     await mongoose.connect(MONGO_URL);
-  
     await populateWithAdmin();
-  
     await mongoose.disconnect();
 };
 
