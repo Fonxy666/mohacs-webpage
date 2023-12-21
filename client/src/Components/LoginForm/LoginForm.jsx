@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Loading from "../Loading";
 import { StyledLoginForm, StyledPassword, StyledInput, StyledShowPasswordButton } from "../../Styles/Login.Styled"
 
 const LoginForm = ({ onSave }) => {
@@ -10,10 +9,10 @@ const LoginForm = ({ onSave }) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        // return onSave({
-        //     name,
-        //     password
-        // });
+        return onSave({
+            name,
+            password
+        });
     };
 
     const handleShowPassword = () => {
