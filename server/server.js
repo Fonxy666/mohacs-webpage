@@ -5,6 +5,7 @@ const AcePokerClothes = require("./database/acepokerclothes.model");
 const JumboPokerClothes = require("./database/jumbopokerclothes.model");
 const UsersModel = require("./database/user.model");
 const News = require("./database/news.model");
+const bcrypt = require('bcrypt');
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -44,10 +45,10 @@ app.get('/v1/api/news/newest', async (req, res) => {
 
 app.post("/v1/api/users/login", async (req, res) => {
     try {
-        const query = JSON.parse(req.query.query);
-        const registeredUser = await RegUser.findAgain(query);
-        const success = await comparePasswords(query.password, registeredUser.password) && (query.userName === registeredUser.user_name);
-        res.json({ success, user_name: registeredUser.user_name, _id: registeredUser._id, dogReference: registeredUser.dogReference });
+        const query = req.body;
+        const registeredUser = await UsersModel.findOne({ userName: query.name });
+        const success = await comparePasswords(query.password, registeredUser.password) && (query.name === registeredUser.userName);
+        res.json({ success, name: registeredUser.userName, _id: registeredUser._id });
     } catch (err) {
         res.status(500).send('An error occurred during login.');
     }
@@ -55,6 +56,7 @@ app.post("/v1/api/users/login", async (req, res) => {
 
 const comparePasswords = async (simplePassword, hashedPassword) => {
     try {
+        console.log(simplePassword, hashedPassword);
         const result = await bcrypt.compare(simplePassword, hashedPassword);
         if (result) {
             return true;
