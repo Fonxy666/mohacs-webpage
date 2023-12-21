@@ -11,6 +11,7 @@ import Contact from "./Pages/Contact";
 
 const App = () => {
     const date = new Date();
+    console.log(`/${date.getFullYear()}.${date.getMonth()}.${date.getDate()}/admin-panel`)
     const router = createBrowserRouter([
         {
             path: "/",
@@ -21,7 +22,7 @@ const App = () => {
             element: <Contact/>
         },
         {
-            path: `/${date.getFullYear()}.${date.getMonth()}.${date.getDate()}/admin-panel`,
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`,
             element: <AdminPage/>
         }
     ]);
