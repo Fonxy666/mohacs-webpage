@@ -1,24 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
+
+import NewsPage from "./Pages/NewsPage";
+import AdminPage from "./Pages/AdminPage";
+
+import { RouterDiv } from "./Styles/Indexjs.Styled";
+import Contact from "./Pages/Contact";
 
 const App = () => {
+    const date = new Date();
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <NewsPage/>
+        },
+        {
+            path: "/contact",
+            element: <Contact/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()}.${date.getDate()}/admin-panel`,
+            element: <AdminPage/>
+        }
+    ]);
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <div>Hello world!</div>
-    },
-  ]);
-
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router}/>
-    </React.StrictMode>
-  );
+    return (
+        <React.StrictMode>
+            <RouterDiv>
+                <RouterProvider router={router}/>
+            </RouterDiv>
+        </React.StrictMode>
+    );
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<App/>);
 
 reportWebVitals();
