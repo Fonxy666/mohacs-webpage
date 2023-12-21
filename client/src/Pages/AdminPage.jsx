@@ -12,12 +12,17 @@ const sendLoginRequest = async (user) => {
             },
             body: JSON.stringify(user),
         });
+        console.log(response);
         if (!response.ok) {
-            alert("Invalid credentials!");
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Login successful!");
+        if (!data.success) {
+            alert("Login unsuccessful!");
+        } else {
+            alert("Login OK!");
+        }
+
     } catch (error) {
         console.error("Login failed:", error.message);
     }
