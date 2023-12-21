@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const AcePokerClothes = require("./database/acepokerclothes.model");
 const JumboPokerClothes = require("./database/jumbopokerclothes.model");
+const UsersModel = require("./database/user.model");
 const News = require("./database/news.model");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
