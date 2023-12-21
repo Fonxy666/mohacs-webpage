@@ -4,12 +4,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import NewsPage from "./Pages/NewsPage";
+import AdminPage from "./Pages/AdminPage";
 
 import { RouterDiv } from "./Styles/Indexjs.Styled";
 import Contact from "./Pages/Contact";
 
 const App = () => {
-
+    const date = new Date();
     const router = createBrowserRouter([
         {
             path: "/",
@@ -19,6 +20,10 @@ const App = () => {
             path: "/contact",
             element: <Contact/>
         },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()}.${date.getDate()}/admin-panel`,
+            element: <AdminPage/>
+        }
     ]);
 
     return (
@@ -31,6 +36,6 @@ const App = () => {
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<App/>);
 
 reportWebVitals();
