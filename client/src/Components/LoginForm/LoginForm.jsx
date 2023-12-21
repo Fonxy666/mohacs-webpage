@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyledLoginForm, StyledPassword, StyledInput, StyledShowPasswordButton } from "../../Styles/Login.Styled"
 
 const LoginForm = ({ onSave }) => {
-    const [name, setName] = useState("");
+    const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState("password");
 
@@ -10,7 +10,7 @@ const LoginForm = ({ onSave }) => {
         e.preventDefault();
 
         return onSave({
-            name,
+            username,
             password
         });
     };
@@ -24,7 +24,7 @@ const LoginForm = ({ onSave }) => {
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">Username:</label>
                 <input
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setUserName(e.target.value)}
                     name="name"
                     id="name"
                     className="form-control"/>
@@ -38,7 +38,7 @@ const LoginForm = ({ onSave }) => {
                         id="brand"
                         type={showPassword}
                         className="form-control"/>
-                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger">Show</StyledShowPasswordButton>
+                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger" type="button">Show</StyledShowPasswordButton>
                 </StyledPassword>
             </div>
             <div className="mb-3">
