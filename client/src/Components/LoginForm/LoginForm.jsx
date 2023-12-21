@@ -38,7 +38,7 @@ const LoginForm = ({ onSave }) => {
                         id="brand"
                         type={showPassword}
                         className="form-control"/>
-                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger">Show</StyledShowPasswordButton>
+                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger" type="button">Show</StyledShowPasswordButton>
                 </StyledPassword>
             </div>
             <div className="mb-3">
