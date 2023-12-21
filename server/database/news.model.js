@@ -10,6 +10,6 @@ const NewModel = new Schema({
     message: String
 });
 
-const News = model("News Model", NewModel)
+const News = model("News Model", NewModel);
 
 module.exports = News;
