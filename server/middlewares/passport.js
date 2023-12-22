@@ -3,7 +3,6 @@ const User = require("../database/user.model");
 const bcrypt = require('bcrypt');
 
 module.exports = (passport) => {
-    console.log('Passport configuration executed');
     passport.use(
         new LocalStrategy(async (username, password, done) => {
             try {
