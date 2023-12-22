@@ -1,4 +1,4 @@
-const User = require('../database/user.model');
+const User = require("../database/user.model");
 const passport = require("passport");
 const { generateToken } = require("../middlewares/auth");
 require("../middlewares/passport")(passport);
@@ -26,7 +26,6 @@ exports.loginUser = (req, res, next) => {
             message: 'Invalid login credentials'
             });
         }
-        console.log(user);
         req.login(user, { session: false }, (err) => {
             if (err) {
                 console.log(err);
@@ -41,14 +40,4 @@ exports.loginUser = (req, res, next) => {
             return res.status(200).json({ message: 'Login successful', token: token, role: user.role });
         });
     })(req, res, next);
-};
-
-exports.getUsers = async (req, res) => {
-    try {
-        const users = await User.find({});
-        res.json(users);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'An error occurred!' });
-    }
 };
