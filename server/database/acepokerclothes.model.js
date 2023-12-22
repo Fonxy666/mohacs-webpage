@@ -11,7 +11,14 @@ const AceMaterialModel = new Schema({
     brand: String,
     price: Number,
     audience: String,
-    image: ImageSchema
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    image: {
+        data: Buffer,
+        contentType: String
+    }
 });
 
 const AcePokerClothes = model("Ace Poker Clothes Model", AceMaterialModel);
