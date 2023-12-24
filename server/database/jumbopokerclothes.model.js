@@ -10,10 +10,7 @@ const JumboMaterialModel = new Schema({
         type: Date,
         default: Date.now
     },
-    image: {
-        data: Buffer,
-        contentType: String
-    }
+    image: String
 });
 
 const JumboPokerClothes = model("Jumbo Poker Clothes Model", JumboMaterialModel);

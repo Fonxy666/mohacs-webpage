@@ -7,7 +7,8 @@ import NewsPage from "./Pages/NewsPage";
 import AdminPage from "./Pages/AdminPage";
 
 import { RouterDiv } from "./Styles/Indexjs.Styled";
-import Contact from "./Pages/Contact";
+import Contact from "./Pages/ContactPage";
+import AcePokerUploadPage from "./Pages/AcePokerUploadPage";
 
 const App = () => {
     const date = new Date();
@@ -23,6 +24,10 @@ const App = () => {
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`,
             element: <AdminPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/upload`,
+            element: <AcePokerUploadPage/>
         }
     ]);
 

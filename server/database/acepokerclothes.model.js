@@ -15,10 +15,7 @@ const AceMaterialModel = new Schema({
         type: Date,
         default: Date.now
     },
-    image: {
-        data: Buffer,
-        contentType: String
-    }
+    image: String
 });
 
 const AcePokerClothes = model("Ace Poker Clothes Model", AceMaterialModel);
