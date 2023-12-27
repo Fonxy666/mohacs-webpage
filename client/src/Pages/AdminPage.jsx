@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../Components/Navbar";
 import LoginForm from "../Components/LoginForm";
@@ -30,32 +31,78 @@ const sendLoginRequest = async (user) => {
     }
 };
 
-const NewsPage = () => {
+const AdminPage = () => {
+    const [jwtToken, setJwtToken] = useState(Cookies.get("jwtToken"));
+    const [role, setRole] = useState(Cookies.get("role"));
+
     const handleOnSave = (credentials) => {
         sendLoginRequest(credentials)
         .then((data) => {
             if (data.role) {
-                Cookies.set("jwtToken", data.token, { expires: 1});
-                Cookies.set("role", data.role, { expires: 1});
-                // Cookies.set("jwtToken", data.token, { expires: 0.0001});
-                // Cookies.set("role", data.role, { expires: 0.0001});
-                console.log(`cookies sat!`)
+                Cookies.set("jwtToken", data.token, { expires: 1 / 24});
+                setJwtToken(data.token);
+                Cookies.set("role", data.role, { expires: 1 / 24});
+                setRole(data.role);
             } else {
                 console.error("Invalid response from server:", data);
             }
         });
     }
-    console.log(Cookies.get("jwtToken"));
-    console.log(Cookies.get("role"));
+
     return (
         <div>
             <NewsContainer>
                 <Navbar/>
-                <LoginForm
-                    onSave = { (element) => handleOnSave(element) }/>
+                {jwtToken && role === "Admin" ? (
+                    <div>
+                        <div className="dropdown">
+                            <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ász póker ruhák kezelése
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <Link to={"./ace-poker/upload"} className="dropdown-item">Feltöltés</Link>
+                                </li>
+                                <li>
+                                    <Link to={"./ace-poker/modification"} className="dropdown-item">Módosítás / Törlés</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="dropdown">
+                            <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Jumbó póker ruhák kezelése
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <Link to={"./jumbo-poker/upload"} className="dropdown-item">Feltöltés</Link>
+                                </li>
+                                <li>
+                                    <Link to={"./jumbo-poker/modification"} className="dropdown-item">Módosítás / Törlés</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="dropdown">
+                            <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hírek kezelése
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <Link to={"./information/upload"} className="dropdown-item">Feltöltés</Link>
+                                </li>
+                                <li>
+                                    <Link to={"./news/modification"} className="dropdown-item">Módosítás / Törlés</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                ) : (
+                    <LoginForm
+                        onSave = { (element) => handleOnSave(element) }/>
+                    ) 
+                }
             </NewsContainer>
         </div>
     );
 };
 
-export default NewsPage;
+export default AdminPage;

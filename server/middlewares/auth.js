@@ -7,12 +7,13 @@ const generateToken = (payload) => {
 };
 
 const verifyToken = (requiredRole) => (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.headers.authorization;
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
+            console.log(token);
             return res.status(401).json({ message: 'Invalid token' });
         }
         req.userId = decoded.userId; 

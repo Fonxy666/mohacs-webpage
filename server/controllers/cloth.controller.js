@@ -11,16 +11,12 @@ exports.getClothes = async (req, res, dataModel, logText) => {
 exports.uploadCloth = async (req, res, dataModel, logText) => {
     try {
         const { name, brand, price, audience, image } = req.body;
-        const imageData = Buffer.from(image.data, "base64");
         const newCloth = new dataModel({
             name,
             brand,
             price,
             audience,
-            image: {
-                data: imageData,
-                contentType: image.contentType
-            }
+            image
         });
         const savedCloth = await newCloth.save();
         res.json(savedCloth);
