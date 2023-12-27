@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledClothForm = styled.form`
+export const StyledForm = styled.form`
     position: absolute;
     width: 30%;
     top: 50%;

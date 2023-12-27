@@ -87,7 +87,7 @@ const AdminPage = () => {
                             </button>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <Link to={"./news/upload"} className="dropdown-item">Feltöltés</Link>
+                                    <Link to={"./information/upload"} className="dropdown-item">Feltöltés</Link>
                                 </li>
                                 <li>
                                     <Link to={"./news/modification"} className="dropdown-item">Módosítás / Törlés</Link>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Loading from "../Loading";
-import { StyledClothForm } from "../../Styles/ClothForm.Styled";
+import { StyledForm } from "../../Styles/Form.Styled";
 
 const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     const [loading, setLoading] = useState(false);
@@ -57,7 +57,7 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     }
 
     return (
-        <StyledClothForm className="container" onSubmit={onSubmit}>
+        <StyledForm className="container" onSubmit={onSubmit}>
             <div className="mb-3">
                 <label className="form-label" htmlFor="name">Megjelenítendő név:</label>
                 <input
@@ -117,7 +117,7 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     Cancel
                 </button>
             </div>
-        </StyledClothForm>
+        </StyledForm>
     );
 };
 

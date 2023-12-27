@@ -21,9 +21,11 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 const userRoutes = require("./routes/userRoutes");
+const newsRoutes = require("./routes/newsRoutes");
 const acePokerRoutes = require("./routes/acePokerRoutes");
 const jumboPokerRouters = require("./routes/jumboPokerRouter");
 app.use('/', userRoutes);
+app.use('/', newsRoutes);
 app.use('/', acePokerRoutes);
 app.use('/', jumboPokerRouters);
 
