@@ -7,7 +7,10 @@ import NewsPage from "./Pages/NewsPage";
 import AdminPage from "./Pages/AdminPage";
 
 import { RouterDiv } from "./Styles/Indexjs.Styled";
-import Contact from "./Pages/Contact";
+import Contact from "./Pages/ContactPage";
+import AcePokerUploadPage from "./Pages/AcePokerUploadPage";
+import JumboPokerUploadPage from "./Pages/JumboPokerUploadPage";
+import InformationUploadPage from "./Pages/InformationUploadPage";
 
 const App = () => {
     const date = new Date();
@@ -23,6 +26,18 @@ const App = () => {
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`,
             element: <AdminPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/upload`,
+            element: <AcePokerUploadPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/upload`,
+            element: <JumboPokerUploadPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/upload`,
+            element: <InformationUploadPage/>
         }
     ]);
 
