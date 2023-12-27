@@ -8,8 +8,8 @@ const NewModel = new Schema({
         default: Date.now
     },
     message: String
-});
+}, {versionKey: false});
 
-const News = model("News Model", NewModel);
+const News = model("News Model", NewModel, "News");
 
 module.exports = News;

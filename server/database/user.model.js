@@ -6,8 +6,8 @@ const UserModel = new Schema({
     username: String,
     password: String,
     role: String
-});
+}, {versionKey: false});
 
-const UsersModel = model("Users", UserModel);
+const UsersModel = model("Users", UserModel, "Users");
 
 module.exports = UsersModel;
