@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import Navbar from "../Components/Navbar";
-import LoginForm from "../Components/LoginForm";
-import { NewsContainer } from "../Styles/News.Styled";
+import Navbar from "../../Components/Navbar";
+import LoginForm from "../../Components/LoginForm";
+import { NewsContainer } from "../../Styles/News.Styled";
 
 const sendLoginRequest = async (user) => {
     try {

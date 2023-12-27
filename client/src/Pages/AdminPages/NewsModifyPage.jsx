@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ElementsTable from "../Components/ElementsTable";
-import Loading from "../Components/Loading";
+import ElementsTable from "../../Components/ElementsTable";
+import Loading from "../../Components/Loading";
 
 const getClothes = async () => {
     try {

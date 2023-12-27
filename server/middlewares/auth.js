@@ -13,7 +13,6 @@ const verifyToken = (requiredRole) => (req, res, next) => {
     }
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
-            console.log(token);
             return res.status(401).json({ message: 'Invalid token' });
         }
         req.userId = decoded.userId; 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ClothForm from "../Components/ClothForm"
+import ClothForm from "../../Components/ClothForm"
 import Cookies from "js-cookie";
 
 const sendClothToDatabase = async (cloth, token) => {
