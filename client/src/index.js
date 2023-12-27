@@ -13,6 +13,7 @@ import JumboPokerUploadPage from "./Pages/JumboPokerUploadPage";
 import InformationUploadPage from "./Pages/InformationUploadPage";
 import AcePokerModifyPage from "./Pages/AcePokerModifyPage";
 import JumboPokerModifyPage from "./Pages/JumboPokerModifyPage";
+import NewsModifyPage from "./Pages/NewsModifyPage";
 
 const App = () => {
     const date = new Date();
@@ -48,6 +49,10 @@ const App = () => {
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/modification`,
             element: <JumboPokerModifyPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification`,
+            element: <NewsModifyPage/>
         }
     ]);
 

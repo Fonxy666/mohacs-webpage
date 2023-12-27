@@ -90,7 +90,7 @@ const AdminPage = () => {
                                     <Link to={"./information/upload"} className="dropdown-item">Feltöltés</Link>
                                 </li>
                                 <li>
-                                    <Link to={"./news/modification"} className="dropdown-item">Módosítás / Törlés</Link>
+                                    <Link to={"./information/modification"} className="dropdown-item">Módosítás / Törlés</Link>
                                 </li>
                             </ul>
                         </div>

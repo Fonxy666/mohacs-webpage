@@ -5,7 +5,7 @@ import Loading from "../Components/Loading";
 
 const getClothes = async () => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/ace-poker/clothes", {
+        const response = await fetch("http://localhost:8080/v1/api/news/newest", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -24,10 +24,10 @@ const getClothes = async () => {
     }
 };
 
-const AcePokerModifyPage = () => {
+const JumboPokerModifyPage = () => {
     const [loading, setLoading] = useState(true);
-    const [clothes, setClothes] = useState([]);
-    const headers = ["#", "Id", "Név", "Márka", "Ár", "Közönség", "Kép", "Módosítás"];
+    const [news, setClothes] = useState([]);
+    const headers = ["#", "Id", "Név", "Szöveg", "Módosítás"];
     const navigate = useNavigate();
     const date = new Date();
 
@@ -56,11 +56,11 @@ const AcePokerModifyPage = () => {
     return (
         <div>
             <ElementsTable 
-                elements = { clothes }
+                elements = { news }
                 headers = { headers }
                 onCancel = { handleCancel }/>
         </div>
     );
 };
 
-export default AcePokerModifyPage;
+export default JumboPokerModifyPage;

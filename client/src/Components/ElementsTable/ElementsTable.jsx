@@ -1,6 +1,6 @@
 import React from "react";
 
-const ClothTable = ({ clothes, headers, onCancel }) => {
+const ElementsTable = ({ elements, headers, onCancel }) => {
 
     return (
         <div>
@@ -8,17 +8,17 @@ const ClothTable = ({ clothes, headers, onCancel }) => {
             <table className="table">
                 <thead>
                     <tr>
-                        {clothes && headers && headers.map(header => (
+                        {elements && headers && headers.map(header => (
                             <th>{header}</th>
                         ))}
                         <th>action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {clothes && headers && clothes.map((cloth, index) => (
+                    {elements && headers && elements.map((element, index) => (
                         <tr>
                             <th>{index+1}</th>
-                            {cloth && Object.values(cloth).map((element, elementIndex) => (
+                            {element && Object.values(element).map((element, elementIndex) => (
                                 <td key={elementIndex}>
                                     {element.length > 100 ? 
                                         <div>Kep</div> : <div>{element}</div>
@@ -37,4 +37,4 @@ const ClothTable = ({ clothes, headers, onCancel }) => {
     );
 };
 
-export default ClothTable;
+export default ElementsTable;

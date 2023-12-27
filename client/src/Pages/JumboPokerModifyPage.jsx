@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ClothTable from "../Components/ClothTable";
+import ElementsTable from "../Components/ElementsTable";
 import Loading from "../Components/Loading";
 
 const getClothes = async () => {
@@ -55,8 +55,8 @@ const JumboPokerModifyPage = () => {
 
     return (
         <div>
-            <ClothTable 
-                clothes = { clothes }
+            <ElementsTable 
+                elements = { clothes }
                 headers = { headers }
                 onCancel = { handleCancel }/>
         </div>
