@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyledForm } from "../../Styles/Form.Styled";
 
 const NewsForm = ({ onSave, onCancel, information }) => {
     const [title, setTitle] = useState(information?.title ?? "");
     const [message, setMessage] = useState(information?.message ?? "");
-
+    const [isFormValid, setIsFormValid] = useState(false);
+    
     const onSubmit = (e) => {
         e.preventDefault();
-
+        
         if (information) {
             return onSave({
                 ...information,
@@ -15,12 +16,17 @@ const NewsForm = ({ onSave, onCancel, information }) => {
                 message
             });
         }
-
+        
         return onSave({
             title,
             message
         });
     };
+
+    useEffect(() => {
+        const isValid = title.trim() !== "" && message.trim() !== "";
+        setIsFormValid(isValid);
+    }, [title, message]);
 
     return (
         <StyledForm className="container" onSubmit={onSubmit}>
@@ -43,11 +49,11 @@ const NewsForm = ({ onSave, onCancel, information }) => {
                     id="message"/>
             </div>
             <div className="buttons">
-                <button className="btn btn-danger" type="submit">
+                <button className={`btn btn-danger ${isFormValid ? "" : "disabled"}`} type="submit">
                     {information ? "Frissítés" : "Feltöltés"}
                 </button>
                 <button className="btn btn-danger" type="button" onClick={onCancel} style={{marginLeft: "5px"}}>
-                    Cancel
+                    Vissza
                 </button>
             </div>
         </StyledForm>

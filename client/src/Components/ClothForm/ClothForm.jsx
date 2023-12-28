@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import Loading from "../Loading";
 import { StyledForm } from "../../Styles/Form.Styled";
 
 const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
-    const [loading, setLoading] = useState(false);
     const [name, setName] = useState(cloth?.name ?? "");
     const [brand, setBrand] = useState(cloth?.brand ?? "");
     const [price, setPrice] = useState(cloth?.pric ?? "");
     const [audience, setAudience] = useState(cloth?.audience ?? "");
     const [image, setImage] = useState(cloth?.image ?? "");
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [priceError, setPriceError] = useState("");
 
     const convertImageToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -52,9 +52,16 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
         });
     };
 
-    if (loading) {
-        return <Loading />;
-    }
+    useEffect(() => {
+        const isValid = name.trim() !== "" && brand.trim() !== "" && /^\d+$/.test(price.trim()) && audience !== "" && image !== "";
+        setIsFormValid(isValid);
+
+        if (!/^\d+$/.test(price.trim()) && price.length > 0) {
+            setPriceError("Ár mező csak számot tartalmazhat");
+        } else {
+            setPriceError("");
+        }
+    }, [name, brand, price, audience, image]);
 
     return (
         <StyledForm className="container" onSubmit={onSubmit}>
@@ -84,6 +91,11 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     onChange={(e) => setPrice(e.target.value)}
                     name="price"
                     id="price"/>
+                {priceError && (
+                    <div class="alert alert-danger" role="alert">
+                        {priceError}
+                    </div>
+                )}
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="audience">Közönség:</label>
@@ -93,13 +105,14 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     name = "audience"
                     id = "audience"
                     value = {audience}>
-                    {audienceOptions && audienceOptions.map(option => (
+                    {audience === "" && <option>Válassz egyet!</option>}
+                    {audienceOptions.map((option) => (
                         <option key={option}>{option}</option>
                     ))}
                 </select>
             </div>
             <div className="mb-3">
-            <label className="form-label" htmlFor="image"/>
+            <label className="form-label" htmlFor="image">Kép:</label>
                 <input
                     name="image"
                     accept=".jpeg, .png, .jpg"
@@ -110,11 +123,11 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     />
             </div>
             <div className="buttons">
-                <button className="btn btn-danger" type="submit">
+                <button className={`btn btn-danger ${isFormValid ? "" : "disabled"}`} type="submit">
                     {cloth ? "Frissítés" : "Feltöltés"}
                 </button>
                 <button className="btn btn-danger" type="button" onClick={onCancel} style={{marginLeft: "5px"}}>
-                    Cancel
+                    Vissza
                 </button>
             </div>
         </StyledForm>

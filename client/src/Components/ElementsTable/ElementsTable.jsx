@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TableDiv } from "../../Styles/Table.Styled";
+import { StyledImageWrapper, StyledImageForTable, StyledImageForModal } from "../../Styles/Image.Styled";
 
 const ElementsTable = ({ elements, headers, onCancel, onModification, onDelete }) => {
     const [selectedElement, setSelectedElement] = useState(null);
@@ -26,7 +27,17 @@ const ElementsTable = ({ elements, headers, onCancel, onModification, onDelete }
                             <th>{index + 1}</th>
                             {element && Object.entries(element).map(([header, value], elementIndex) => (
                                 <React.Fragment key={elementIndex}>
-                                    <td>{header === 'image' ? 'Kep' : header === 'date' ? splitDate(value) : value}</td>
+                                    <td>
+                                        {header === 'image' ? (
+                                            <StyledImageWrapper>
+                                                <StyledImageForTable src={element.image}/>
+                                            </StyledImageWrapper>
+                                        ) : header === 'date' ? (
+                                            splitDate(value)
+                                        ) : (
+                                            value
+                                        )}
+                                    </td>
                                 </React.Fragment>
                             ))}
                                 <td>
@@ -52,7 +63,7 @@ const ElementsTable = ({ elements, headers, onCancel, onModification, onDelete }
                                     <div>Név: {selectedElement.name}</div>
                                     <div>Ár: {selectedElement.price}</div>
                                     <div>Kép:</div>
-                                    <img src={selectedElement.image}/>
+                                    <StyledImageForModal src={selectedElement.image}/>
                                 </div>
                             ) : (
                                 selectedElement && (
