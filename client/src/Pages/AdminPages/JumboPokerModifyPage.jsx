@@ -74,10 +74,8 @@ const JumboPokerModifyPage = () => {
         navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel`);
     };
 
-    const handleModification = (id, name) => {
-        console.log(id);
-        console.log(name);
-        alert(`${name} sikeresen frissítve!`);
+    const handleModification = (cloth) => {
+        navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/modification/${cloth._id}`, { state: { cloth } });
     }
     
     const handleDelete = (id, name) => {

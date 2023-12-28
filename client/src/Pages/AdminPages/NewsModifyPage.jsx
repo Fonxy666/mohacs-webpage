@@ -49,6 +49,10 @@ const JumboPokerModifyPage = () => {
         navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel`);
     };
 
+    const handleModification = (information) => {
+        navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification/${information._id}`, { state: { information } });
+    }
+
     if (loading) {
         return <Loading />;
     }
@@ -58,7 +62,8 @@ const JumboPokerModifyPage = () => {
             <ElementsTable 
                 elements = { news }
                 headers = { headers }
-                onCancel = { handleCancel }/>
+                onCancel = { handleCancel }
+                onModification = { handleModification }/>
         </div>
     );
 };
