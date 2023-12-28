@@ -41,7 +41,7 @@ const ElementsTable = ({ elements, headers, onCancel, onModification, onDelete }
                                 </React.Fragment>
                             ))}
                                 <td>
-                                    <button className="btn btn-danger" onClick={() => onModification(element._id, element.name)}>Módosítás</button>
+                                    <button className="btn btn-danger" onClick={() => onModification(element)}>Módosítás</button>
                                     <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal" style={{marginLeft: "5%"}} onClick={() => setSelectedElement(element)}>Törlés</button>
                                 </td>
                         </tr>

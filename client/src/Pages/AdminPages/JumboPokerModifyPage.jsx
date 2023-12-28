@@ -12,13 +12,12 @@ const getClothes = async () => {
                 "Content-Type": "application/json"
             },
         });
-
         if (!response.ok) {
             console.error(`HTTP error! Status: ${response.status}`);
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
-        return await response.json();
+        const responseData = await response.json();
+        return { success: true, data: responseData };
     } catch (error) {
         console.error("Post failed:", error.message);
         throw error;
@@ -36,15 +35,14 @@ const deleteCloth = async (id, token) => {
         });
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult módositani!");
             } else {
-                alert("Cloth delete failed!");
+                alert("Valami hiba történt a törlés során!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-        return await response.json();
+        return { success: true, response };
     } catch (error) {
         console.error("Delete failed:", error.message);
     }
@@ -61,7 +59,7 @@ const JumboPokerModifyPage = () => {
     const fetchData = async () => {
         try {
             const clothesData = await getClothes();
-            setClothes(clothesData);
+            setClothes(clothesData.data);
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -84,7 +82,11 @@ const JumboPokerModifyPage = () => {
     
     const handleDelete = (id, name) => {
         deleteCloth(id, token)
-        .then(() => alert(`${name} sikeresen törölve!`));
+        .then((response) => {
+            if (response.success) {
+                alert(`${name} sikeresen törölve!`);
+            }
+        })
     }
 
     if (loading) {

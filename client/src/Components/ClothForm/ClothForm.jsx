@@ -4,7 +4,7 @@ import { StyledForm } from "../../Styles/Form.Styled";
 const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     const [name, setName] = useState(cloth?.name ?? "");
     const [brand, setBrand] = useState(cloth?.brand ?? "");
-    const [price, setPrice] = useState(cloth?.pric ?? "");
+    const [price, setPrice] = useState(cloth?.price ?? "");
     const [audience, setAudience] = useState(cloth?.audience ?? "");
     const [image, setImage] = useState(cloth?.image ?? "");
     const [isFormValid, setIsFormValid] = useState(false);
@@ -53,10 +53,10 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     };
 
     useEffect(() => {
-        const isValid = name.trim() !== "" && brand.trim() !== "" && /^\d+$/.test(price.trim()) && audience !== "" && image !== "";
+        const isValid = name.trim() !== "" && brand.trim() !== "" && /^\d+$/.test(price.toString().trim()) && audience !== "" && image !== "";
         setIsFormValid(isValid);
 
-        if (!/^\d+$/.test(price.trim()) && price.length > 0) {
+        if (!/^\d+$/.test(price.toString().trim()) && price.length > 0) {
             setPriceError("Ár mező csak számot tartalmazhat");
         } else {
             setPriceError("");
@@ -92,7 +92,7 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     name="price"
                     id="price"/>
                 {priceError && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {priceError}
                     </div>
                 )}
@@ -112,7 +112,7 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                 </select>
             </div>
             <div className="mb-3">
-            <label className="form-label" htmlFor="image">Kép:</label>
+                <label className="form-label" htmlFor="image">Kép:</label>
                 <input
                     name="image"
                     accept=".jpeg, .png, .jpg"
@@ -121,6 +121,11 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     className="form-control"
                     onChange={(e) => handleFileUpload(e)}
                     />
+                {image && (
+                    <div className="mt-2">
+                    <img src={image} alt="Preview" style={{ maxWidth: "30%" }} />
+                    </div>
+                )}
             </div>
             <div className="buttons">
                 <button className={`btn btn-danger ${isFormValid ? "" : "disabled"}`} type="submit">

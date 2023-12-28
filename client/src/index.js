@@ -12,6 +12,7 @@ import InformationUploadPage from "./Pages/AdminPages/InformationUploadPage";
 import AcePokerModifyPage from "./Pages/AdminPages/AcePokerModifyPage";
 import JumboPokerModifyPage from "./Pages/AdminPages/JumboPokerModifyPage";
 import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
+import AcePokerChangeDataPage from "./Pages/AdminPages/AcePokerChangeDataPage";
 
 const App = () => {
     const date = new Date();
@@ -51,6 +52,10 @@ const App = () => {
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification`,
             element: <NewsModifyPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/modification/:id`,
+            element: <AcePokerChangeDataPage/>
         }
     ]);
 

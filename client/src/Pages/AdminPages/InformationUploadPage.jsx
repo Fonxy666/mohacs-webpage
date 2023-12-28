@@ -14,18 +14,16 @@ const sendInformationToDatabase = async (information, token) => {
             },
             body: JSON.stringify(information),
         });
-    
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult módositani!");
             } else {
-                alert("New information post to database failed!");
+                alert("Valami hiba történt!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-        return await response.json();
+        return { success: true, response };
     } catch (error) {
         console.error("Post failed:", error.message);
     }
@@ -38,9 +36,14 @@ const InformationUploadPage = () => {
     const handleSubmit = (element) => {
         const token = Cookies.get("jwtToken");
         sendInformationToDatabase(element, token)
-        .then(() => {
-            navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
-            alert("Hír sikeresen feltöltve!");
+        .then((response) => {
+            if (response.success) {
+                navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
+                alert("Hír sikeresen feltöltve!");
+            } else {
+                console.log(response);
+                alert("Valami hiba történt!");
+            }
         });
     }
 

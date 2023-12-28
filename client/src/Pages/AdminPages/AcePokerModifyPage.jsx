@@ -12,43 +12,15 @@ const getClothes = async () => {
                 "Content-Type": "application/json"
             },
         });
-
         if (!response.ok) {
             console.error(`HTTP error! Status: ${response.status}`);
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
-        return await response.json();
+        const responseData = await response.json();
+        return { success: true, data: responseData };
     } catch (error) {
         console.error("Post failed:", error.message);
         throw error;
-    }
-};
-
-const modifyExistingCloth = async (cloth, token, id) => {
-    try {
-        const response = await fetch(`http://localhost:8080/v1/api/ace-poker/${id}/update`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `${token}`
-            },
-            body: JSON.stringify(cloth),
-        });
-    
-        if (!response.ok) {
-            if (response.status === 401) {
-                alert("You are unathorized!");
-            } else {
-                alert("New cloth post to database failed!");
-                console.error(`HTTP error! Status: ${response.status}`);
-            }
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-    
-        return await response.json();
-    } catch (error) {
-        console.error("Patch failed:", error.message);
     }
 };
 
@@ -63,15 +35,14 @@ const deleteCloth = async (id, token) => {
         });
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult törölni!");
             } else {
-                alert("Cloth delete failed!");
+                alert("Valami hiba történt!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-        return await response.json();
+        return { success: true, response };
     } catch (error) {
         console.error("Delete failed:", error.message);
     }
@@ -88,7 +59,7 @@ const AcePokerModifyPage = () => {
     const fetchData = async () => {
         try {
             const clothesData = await getClothes();
-            setClothes(clothesData);
+            setClothes(clothesData.data);
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -103,15 +74,17 @@ const AcePokerModifyPage = () => {
         navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel`);
     };
 
-    const handleModification = (id, name) => {
-        console.log(id);
-        console.log(name);
-        alert(`${name} sikeresen frissítve!`);
+    const handleModification = (cloth) => {
+        navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/modification/${cloth._id}`, { state: { cloth } });
     }
     
     const handleDelete = (id, name) => {
         deleteCloth(id, token)
-        .then(() => alert(`${name} sikeresen törölve!`));
+        .then((response) => {
+            if (response.success) {
+                alert(`${name} sikeresen törölve!`);
+            }
+        })
     }
 
     if (loading) {
