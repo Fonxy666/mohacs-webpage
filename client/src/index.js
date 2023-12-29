@@ -8,7 +8,7 @@ import Contact from "./Pages/UserPages/ContactPage";
 import AdminPage from "./Pages/AdminPages/AdminPage";
 import AcePokerUploadPage from "./Pages/AdminPages/AcePokerUploadPage";
 import JumboPokerUploadPage from "./Pages/AdminPages/JumboPokerUploadPage";
-import InformationUploadPage from "./Pages/AdminPages/NewsUploadPage";
+import NewsUploadPage from "./Pages/AdminPages/NewsUploadPage";
 import AcePokerModifyPage from "./Pages/AdminPages/AcePokerModifyPage";
 import JumboPokerModifyPage from "./Pages/AdminPages/JumboPokerModifyPage";
 import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
@@ -40,8 +40,8 @@ const App = () => {
             element: <JumboPokerUploadPage/>
         },
         {
-            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/upload`,
-            element: <InformationUploadPage/>
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/upload`,
+            element: <NewsUploadPage/>
         },
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/modification`,
@@ -52,7 +52,7 @@ const App = () => {
             element: <JumboPokerModifyPage/>
         },
         {
-            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification`,
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/modification`,
             element: <NewsModifyPage/>
         },
         {
@@ -64,7 +64,7 @@ const App = () => {
             element: <JumboPokerChangeDataPage/>
         },
         {
-            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification/:id`,
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/modification/:id`,
             element: <NewsPokerChangeDataPage/>
         }
     ]);

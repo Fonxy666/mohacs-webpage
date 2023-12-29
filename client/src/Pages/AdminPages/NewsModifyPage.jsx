@@ -50,7 +50,7 @@ const JumboPokerModifyPage = () => {
     };
 
     const handleModification = (information) => {
-        navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/information/modification/${information._id}`, { state: { information } });
+        navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/modification/${information._id}`, { state: { information } });
     }
 
     if (loading) {

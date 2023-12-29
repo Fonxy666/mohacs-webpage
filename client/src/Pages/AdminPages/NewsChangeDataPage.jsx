@@ -37,7 +37,7 @@ const AcePokerChangeDataPage = () => {
     const information = location.state.information;
 
     const handleCancel = () => {
-        navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel/information/modification`);
+        navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel/new/modification`);
     };
 
     const handleModification = (information) => {
@@ -45,7 +45,7 @@ const AcePokerChangeDataPage = () => {
         .then((res) => {
             if (res.success) {
                 alert("Módosítás sikeres!");
-                navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel/information/modification`);
+                navigate(`/${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}/admin-panel/new/modification`);
             } else {
                 console.log(res);
                 alert("Valami hiba történt!");
