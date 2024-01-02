@@ -16,8 +16,8 @@ const AceMaterialModel = new Schema({
         default: Date.now
     },
     image: String
-});
+}, {versionKey: false});
 
-const AcePokerClothes = model("Ace Poker Clothes Model", AceMaterialModel);
+const AcePokerClothes = model("Ace Poker Clothes Model", AceMaterialModel, "Ace Poker Clothes");
 
 module.exports = AcePokerClothes;

@@ -1,45 +1,49 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ClothForm from "../Components/ClothForm"
 import Cookies from "js-cookie";
+import NewsForm from "../../Components/NewsForm/NewsForm";
 
-const sendClothToDatabase = async (cloth, token) => {
+const sendInformationToDatabase = async (information, token) => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/jumbo-poker/upload", {
+        console.log(information);
+        const response = await fetch("http://localhost:8080/v1/api/news/upload", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `${token}`
             },
-            body: JSON.stringify(cloth),
+            body: JSON.stringify(information),
         });
-    
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult módositani!");
             } else {
-                alert("New cloth post to database failed!");
+                alert("Valami hiba történt!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-        return await response.json();
+        return { success: true, response };
     } catch (error) {
         console.error("Post failed:", error.message);
     }
 };
 
-const JumboPokerUploadPage = () => {
+const InformationUploadPage = () => {
     const navigate = useNavigate();
     const date = new Date();
 
     const handleSubmit = (element) => {
         const token = Cookies.get("jwtToken");
-        sendClothToDatabase(element, token)
-        .then(() => {
-            navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
-            alert("Ruha sikeresen feltöltve!");
+        sendInformationToDatabase(element, token)
+        .then((response) => {
+            if (response.success) {
+                navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
+                alert("Hír sikeresen feltöltve!");
+            } else {
+                console.log(response);
+                alert("Valami hiba történt!");
+            }
         });
     }
 
@@ -49,12 +53,11 @@ const JumboPokerUploadPage = () => {
 
     return (
         <div>
-            <ClothForm
+            <NewsForm
                 onSave={(e) => handleSubmit(e)}
-                onCancel={() => handleCancel()}
-                audienceOptions={["noi", "ferfi"]}/>
+                onCancel={() => handleCancel()}/>
         </div>
     );
 };
 
-export default JumboPokerUploadPage;
+export default InformationUploadPage;

@@ -1,25 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ClothForm from "../../Components/ClothForm"
 import Cookies from "js-cookie";
-import NewsForm from "../Components/NewsForm/NewsForm";
 
-const sendInformationToDatabase = async (information, token) => {
+const sendClothToDatabase = async (cloth, token) => {
     try {
-        console.log(information);
-        const response = await fetch("http://localhost:8080/v1/api/news/upload", {
+        const response = await fetch("http://localhost:8080/v1/api/jumbo-poker/upload", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `${token}`
             },
-            body: JSON.stringify(information),
+            body: JSON.stringify(cloth),
         });
     
         if (!response.ok) {
             if (response.status === 401) {
                 alert("You are unathorized!");
             } else {
-                alert("New information post to database failed!");
+                alert("New cloth post to database failed!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -31,16 +30,16 @@ const sendInformationToDatabase = async (information, token) => {
     }
 };
 
-const InformationUploadPage = () => {
+const JumboPokerUploadPage = () => {
     const navigate = useNavigate();
     const date = new Date();
 
     const handleSubmit = (element) => {
         const token = Cookies.get("jwtToken");
-        sendInformationToDatabase(element, token)
+        sendClothToDatabase(element, token)
         .then(() => {
             navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
-            alert("Hír sikeresen feltöltve!");
+            alert("Ruha sikeresen feltöltve!");
         });
     }
 
@@ -50,11 +49,12 @@ const InformationUploadPage = () => {
 
     return (
         <div>
-            <NewsForm
+            <ClothForm
                 onSave={(e) => handleSubmit(e)}
-                onCancel={() => handleCancel()}/>
+                onCancel={() => handleCancel()}
+                audienceOptions={["noi", "ferfi"]}/>
         </div>
     );
 };
 
-export default InformationUploadPage;
+export default JumboPokerUploadPage;

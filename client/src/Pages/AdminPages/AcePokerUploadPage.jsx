@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ClothForm from "../Components/ClothForm"
+import ClothForm from "../../Components/ClothForm"
 import Cookies from "js-cookie";
 
 const sendClothToDatabase = async (cloth, token) => {
@@ -13,18 +13,16 @@ const sendClothToDatabase = async (cloth, token) => {
             },
             body: JSON.stringify(cloth),
         });
-    
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult feltölteni!");
             } else {
-                alert("New cloth post to database failed!");
+                alert("Valami hiva történt!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
-        return await response.json();
+        return { success: true, response };
     } catch (error) {
         console.error("Post failed:", error.message);
     }
@@ -37,9 +35,13 @@ const AcePokerUploadPage = () => {
     const handleSubmit = (element) => {
         const token = Cookies.get("jwtToken");
         sendClothToDatabase(element, token)
-        .then(() => {
-            navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
-            alert("Ruha sikeresen feltöltve!");
+        .then((response) => {
+            if (response.success) {
+                navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
+                alert("Ruha sikeresen feltöltve!");
+            } else {
+                console.log("Valami hiva történt!");
+            }
         });
     }
 
