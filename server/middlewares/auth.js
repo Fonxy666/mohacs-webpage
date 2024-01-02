@@ -7,7 +7,7 @@ const generateToken = (payload) => {
 };
 
 const verifyToken = (requiredRole) => (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.headers.authorization;
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }

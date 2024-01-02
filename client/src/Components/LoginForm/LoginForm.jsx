@@ -22,7 +22,7 @@ const LoginForm = ({ onSave }) => {
     return (
         <StyledLoginForm onSubmit={onSubmit}>
             <div className="mb-3">
-                <label htmlFor="name" className="form-label">Username:</label>
+                <label htmlFor="name" className="form-label">Felhasználónév:</label>
                 <input
                     onChange={(e) => setUserName(e.target.value)}
                     name="name"
@@ -30,7 +30,7 @@ const LoginForm = ({ onSave }) => {
                     className="form-control"/>
             </div>
             <div className="mb-3">
-                <label htmlFor="brand" className="form-label">Password:</label>
+                <label htmlFor="brand" className="form-label">Jelszó:</label>
                 <StyledPassword>
                     <StyledInput
                         onChange={(e) => setPassword(e.target.value)}
@@ -38,11 +38,11 @@ const LoginForm = ({ onSave }) => {
                         id="brand"
                         type={showPassword}
                         className="form-control"/>
-                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger" type="button">Show</StyledShowPasswordButton>
+                    <StyledShowPasswordButton onClick={() => handleShowPassword()} className="btn btn-danger" type="button">Mutat</StyledShowPasswordButton>
                 </StyledPassword>
             </div>
             <div className="mb-3">
-                <button type="submit" className="btn btn-danger">Login</button>
+                <button type="submit" className="btn btn-danger">Bejelentkezés</button>
             </div>
         </StyledLoginForm>
     );

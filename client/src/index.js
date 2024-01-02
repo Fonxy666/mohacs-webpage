@@ -2,12 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-
-import NewsPage from "./Pages/NewsPage";
-import AdminPage from "./Pages/AdminPage";
-
 import { RouterDiv } from "./Styles/Indexjs.Styled";
-import Contact from "./Pages/Contact";
+import NewsPage from "./Pages/UserPages/NewsPage";
+import Contact from "./Pages/UserPages/ContactPage";
+import AdminPage from "./Pages/AdminPages/AdminPage";
+import AcePokerUploadPage from "./Pages/AdminPages/AcePokerUploadPage";
+import JumboPokerUploadPage from "./Pages/AdminPages/JumboPokerUploadPage";
+import NewsUploadPage from "./Pages/AdminPages/NewsUploadPage";
+import AcePokerModifyPage from "./Pages/AdminPages/AcePokerModifyPage";
+import JumboPokerModifyPage from "./Pages/AdminPages/JumboPokerModifyPage";
+import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
+import AcePokerChangeDataPage from "./Pages/AdminPages/AcePokerChangeDataPage";
+import JumboPokerChangeDataPage from "./Pages/AdminPages/JumboPokerChangeDataPage";
+import NewsPokerChangeDataPage from "./Pages/AdminPages/NewsChangeDataPage";
 
 const App = () => {
     const date = new Date();
@@ -23,6 +30,42 @@ const App = () => {
         {
             path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`,
             element: <AdminPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/upload`,
+            element: <AcePokerUploadPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/upload`,
+            element: <JumboPokerUploadPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/upload`,
+            element: <NewsUploadPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/modification`,
+            element: <AcePokerModifyPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/modification`,
+            element: <JumboPokerModifyPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/modification`,
+            element: <NewsModifyPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/ace-poker/modification/:id`,
+            element: <AcePokerChangeDataPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/jumbo-poker/modification/:id`,
+            element: <JumboPokerChangeDataPage/>
+        },
+        {
+            path: `/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel/new/modification/:id`,
+            element: <NewsPokerChangeDataPage/>
         }
     ]);
 

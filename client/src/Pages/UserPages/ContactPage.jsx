@@ -1,6 +1,6 @@
 import React, { useState, useEffect  } from 'react';
-import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer, StyledText } from "../Styles/Contact.Styled";
-import Navbar from "../Components/Navbar";
+import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer, StyledText } from "../../Styles/Contact.Styled";
+import Navbar from "../../Components/Navbar";
 
 const Contact = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
