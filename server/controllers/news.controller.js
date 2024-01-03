@@ -2,8 +2,13 @@ const News = require("../database/news.model");
 
 exports.getLatestNews = async (req, res) => {
     try {
-        const news = await News.find({}).sort({created: "desc"});
-        res.json(news);
+        if ((await News.find({})).length <= 1) {
+            const news = await News.find({});
+            res.json(news);
+        } else {
+            const news = await News.find({}).sort({ date: -1 });
+            res.json(news);
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "An error occurred during getting the latest news!" });
@@ -48,7 +53,7 @@ exports.deleteNew = async (req, res) => {
         if (!formerNew) {
             console.log("Couldn't find the desired 'new' for delete!");
         }
-        const deleted = await formerNew.delete();
+        const deleted = await formerNew.deleteOne();
         return res.json(deleted);
     } catch (error) {
         console.log(error);
