@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const clothController = require("../controllers/cloth.controller");
 const { verifyToken } = require("../middlewares/auth");
-const JumboPokerClothes = require("../database/jumboPokerClothes.model");
+const JumboPokerClothes = require("../database/jumbopokerclothes.model");
 const logForMultiElementsText = "Jumbo Poker Clothes";
 const logForSingleElement = "Jumbo Poker Cloth";
 

@@ -15,7 +15,6 @@ import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
 import AcePokerChangeDataPage from "./Pages/AdminPages/AcePokerChangeDataPage";
 import JumboPokerChangeDataPage from "./Pages/AdminPages/JumboPokerChangeDataPage";
 import NewsPokerChangeDataPage from "./Pages/AdminPages/NewsChangeDataPage";
-
 const App = () => {
     const date = new Date();
     const router = createBrowserRouter([
