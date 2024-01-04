@@ -49,7 +49,7 @@ exports.deleteCloth = async (req, res, dataModel, logText) => {
         if (!cloth) {
             throw new Error(`Couldn't find the desired ${logText} for delete!`);
         }
-        const deleted = await dataModel.deleteOne();
+        const deleted = await dataModel.deleteOne({ _id: req.params.id });
         return res.json(deleted);
     } catch (error) {
         console.error(error.stack);

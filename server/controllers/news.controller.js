@@ -53,7 +53,7 @@ exports.deleteNew = async (req, res) => {
         if (!formerNew) {
             console.log("Couldn't find the desired 'new' for delete!");
         }
-        const deleted = await formerNew.deleteOne();
+        const deleted = await formerNew.deleteOne({ _id: req.params.id });
         return res.json(deleted);
     } catch (error) {
         console.error(error);
