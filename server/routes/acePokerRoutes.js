@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const clothController = require("../controllers/cloth.controller");
 const { verifyToken } = require("../middlewares/auth");
-const AcePokerClothes = require("../database/acePokerClothes.model");
+const AcePokerClothes = require("../database/acepokerclothes.model");
 const logForMultiElementsText = "Ace Poker Clothes";
 const logForSingleElement = "Ace Poker Cloth";
 
