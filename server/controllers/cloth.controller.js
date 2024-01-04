@@ -3,7 +3,7 @@ exports.getClothes = async (req, res, dataModel, logText) => {
         const clothes = await dataModel.find({});
         res.json(clothes);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: `An error occurred during getting the ${logText}!` });
     }
 };
@@ -21,7 +21,7 @@ exports.uploadCloth = async (req, res, dataModel, logText) => {
         const savedCloth = await newCloth.save();
         res.json(savedCloth);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: `An error occurred during upload the new ${logText}!` });
     }
 };

@@ -10,6 +10,10 @@ const loginRouter = require("../routes/userRoutes");
 const app = express();
 let mongod;
 
+function generateValidObjectId() {
+    return mongoose.Types.ObjectId().toString();
+}
+
 beforeAll(async () => {
     mongod = await MongoMemoryServer.create();
     const uri = mongod.getUri();
@@ -17,7 +21,8 @@ beforeAll(async () => {
     app.use(express.json());
     app.use('/', clothRouter);
     app.use('/', loginRouter);
-  
+
+    mongoose.set('strictQuery', false);
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
@@ -67,6 +72,20 @@ describe('Cloth Controller Tests', () => {
 
         findMock.mockRestore();
     });
+
+    it('should handle error when getting clothes', async () => {
+        const findMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(ClothModel, 'find').mockImplementationOnce(findMock);
+    
+        const response = await supertest(app)
+            .get('/v1/api/ace-poker/clothes')
+            .set('Authorization', `${authToken}`);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: 'An error occurred during getting the Ace Poker Clothes!' });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should upload a new cloth', async () => {
         const clothData = {
@@ -90,9 +109,26 @@ describe('Cloth Controller Tests', () => {
     
         saveMock.mockRestore();
     });
+
+    it('shouldn`t upload a new cloth', async () => {
+        const clothData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(ClothModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .post('/v1/api/ace-poker/upload')
+            .set('Authorization', `${authToken}`)
+            .send(clothData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during upload the new Ace Poker Cloth!` });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should patch an existing cloth', async () => {
-        const clothId = 'sample-cloth-id';
+        const clothId = generateValidObjectId();
         const clothData = {
             name: 'Sample Cloth',
             brand: 'Sample Brand',
@@ -113,9 +149,27 @@ describe('Cloth Controller Tests', () => {
     
         findOneAndUpdateMock.mockRestore();
     });
+
+    it('shouldn`t patch an existing cloth', async () => {
+        const clothId = generateValidObjectId();
+        const clothData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(ClothModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .patch(`/v1/api/ace-poker/${clothId}/update`)
+            .set('Authorization', `${authToken}`)
+            .send(clothData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during patching the desired Ace Poker Cloth!` });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should delete an existing cloth', async () => {
-        const clothId = 'sample-cloth-id';
+        const clothId = generateValidObjectId();
       
         const findByIdMock = jest.spyOn(ClothModel, 'findById').mockResolvedValueOnce({});
         const deleteOneMock = jest.spyOn(ClothModel, 'deleteOne').mockResolvedValueOnce({ deletedCount: 1 });
@@ -133,5 +187,23 @@ describe('Cloth Controller Tests', () => {
             findByIdMock.mockRestore();
             deleteOneMock.mockRestore();
         }
+    });
+
+    it('it should handle error when deleting a cloth', async () => {
+        const clothId = generateValidObjectId();
+        const clothData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(ClothModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .delete(`/v1/api/ace-poker/${clothId}/delete`)
+            .set('Authorization', `${authToken}`)
+            .send(clothData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during delete the desired Ace Poker Cloth!` });
+    
+        jest.restoreAllMocks();
     });
 });

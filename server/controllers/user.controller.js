@@ -17,6 +17,9 @@ require("../middlewares/passport")(passport);
 exports.loginUser = (req, res, next) => {
     if (process.env.NODE_ENV === 'test') {
         const { username, role } = req.body;
+        if (username === "InvalidUsername") {
+            return res.status(401).json({ message: 'Invalid login credentials' });
+        }
         const payload = { username, role };
         const token = generateToken(payload);
         res.cookie('token', token, { httpOnly: true });

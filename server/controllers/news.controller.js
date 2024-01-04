@@ -10,7 +10,7 @@ exports.getLatestNews = async (req, res) => {
             res.json(news);
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: "An error occurred during getting the latest news!" });
     }
 };
@@ -25,7 +25,7 @@ exports.uploadNew = async (req, res) => {
         const newNewsSaved = await news.save();
         res.json(newNewsSaved);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: "An error occurred during upload the new 'new'!" });
     }
 };
@@ -56,7 +56,7 @@ exports.deleteNew = async (req, res) => {
         const deleted = await formerNew.deleteOne();
         return res.json(deleted);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: "An error occurred during delete the desired 'new'!" });
     }
 }

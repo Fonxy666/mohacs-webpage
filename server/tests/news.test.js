@@ -10,6 +10,10 @@ const loginRouter = require("../routes/userRoutes");
 const app = express();
 let mongod;
 
+function generateValidObjectId() {
+    return mongoose.Types.ObjectId().toString();
+}
+
 beforeAll(async () => {
     mongod = await MongoMemoryServer.create();
     const uri = mongod.getUri();
@@ -17,7 +21,7 @@ beforeAll(async () => {
     app.use(express.json());
     app.use('/', newsRouter);
     app.use('/', loginRouter);
-  
+    mongoose.set('strictQuery', false);
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
@@ -67,7 +71,19 @@ describe('News Controller Tests', () => {
     
         findMock.mockRestore();
     });
+
+    it('should handle error when getting clothes', async () => {
+        const findMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(NewsModel, 'find').mockImplementationOnce(findMock);
     
+        const response = await supertest(app)
+            .get('/v1/api/news/newest');
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: 'An error occurred during getting the latest news!' });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should upload a new new', async () => {
         const newData = {
@@ -88,11 +104,28 @@ describe('News Controller Tests', () => {
     
         saveMock.mockRestore();
     });
+
+    it('shouldn`t upload a new new', async () => {
+        const newData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(NewsModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .post('/v1/api/news/upload')
+            .set('Authorization', `${authToken}`)
+            .send(newData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during upload the new 'new'!` });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should patch an existing new', async () => {
-        const newId = 'sample-new-id';
+        const newId = generateValidObjectId();
         const newData = {
-            title: 'Sample new title',
+            title: newId,
             message: 'Sample message'
         };
   
@@ -108,11 +141,29 @@ describe('News Controller Tests', () => {
     
         findOneAndUpdateMock.mockRestore();
     });
+
+    it('shouldn`t patch an existing new', async () => {
+        const newId = generateValidObjectId();
+        const clothData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(NewsModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .patch(`/v1/api/news/${newId}/update`)
+            .set('Authorization', `${authToken}`)
+            .send(clothData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during patching the desired 'new'!` });
+    
+        jest.restoreAllMocks();
+    });
   
     it('should delete an existing new', async () => {
-        const newId = 'sample-new-id';
+        const newId = generateValidObjectId();
         const mockNews = {
-            _id: 'sample-new-id',
+            _id: newId,
             deleteOne: jest.fn().mockResolvedValue({ deletedCount: 1 }),
         };
     
@@ -132,5 +183,23 @@ describe('News Controller Tests', () => {
         } finally {
             findByIdMock.mockRestore();
         }
+    });
+
+    it('it should handle error when deleting a new', async () => {
+        const newId = generateValidObjectId();
+        const clothData = {};
+    
+        const saveMock = jest.fn().mockRejectedValueOnce(new Error('Some error message'));
+        jest.spyOn(NewsModel.prototype, 'save').mockImplementationOnce(saveMock);
+    
+        const response = await supertest(app)
+            .delete(`/v1/api/news/${newId}/delete`)
+            .set('Authorization', `${authToken}`)
+            .send(clothData);
+    
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ success: false, message: `An error occurred during delete the desired 'new'!` });
+    
+        jest.restoreAllMocks();
     });
 });
