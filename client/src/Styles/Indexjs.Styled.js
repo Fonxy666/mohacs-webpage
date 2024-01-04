@@ -1,6 +1,24 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import backgroundImage from "../Images/cards.png";
 
 export const RouterDiv = styled.div`
     min-height: 100vh;
-    background: radial-gradient(circle, rgba(194,131,131,1) 0%, rgba(144,60,60,1) 50%, rgba(51,18,18,1) 100%);
+    background: radial-gradient(circle, rgba(194,131,131,0.5) 0%, rgba(144,60,60,0.6) 50%, rgba(51,18,18,0.7) 100%);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
+    &:before {
+        content: '';
+        background-image: url(${backgroundImage});
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.5;
+        z-index: -1;
+    }
 `;
