@@ -51,7 +51,7 @@ const deleteNew = async (id, token) => {
 
 const JumboPokerModifyPage = () => {
     const [loading, setLoading] = useState(true);
-    const [news, setClothes] = useState([]);
+    const [news, setNews] = useState([]);
     const headers = ["#", "Id", "Név", "Szöveg", "Módosítás"];
     const navigate = useNavigate();
     const date = new Date();
@@ -60,7 +60,7 @@ const JumboPokerModifyPage = () => {
     const fetchData = async () => {
         try {
             const clothesData = await getNews();
-            setClothes(clothesData);
+            setNews(clothesData);
             setLoading(false);
         } catch (error) {
             setLoading(false);
