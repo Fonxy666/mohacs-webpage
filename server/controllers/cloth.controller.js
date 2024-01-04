@@ -3,7 +3,7 @@ exports.getClothes = async (req, res, dataModel, logText) => {
         const clothes = await dataModel.find({});
         res.json(clothes);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: `An error occurred during getting the ${logText}!` });
     }
 };
@@ -21,7 +21,7 @@ exports.uploadCloth = async (req, res, dataModel, logText) => {
         const savedCloth = await newCloth.save();
         res.json(savedCloth);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, message: `An error occurred during upload the new ${logText}!` });
     }
 };
@@ -43,16 +43,16 @@ exports.patchCloth  = async (req, res, dataModel, logText) => {
     }
 }
 
-exports.deleteCloth  = async (req, res, dataModel, logText) => {
+exports.deleteCloth = async (req, res, dataModel, logText) => {
     try {
         const cloth = await dataModel.findById(req.params.id);
         if (!cloth) {
             throw new Error(`Couldn't find the desired ${logText} for delete!`);
         }
-        const deleted = await cloth.delete();
+        const deleted = await dataModel.deleteOne({ _id: req.params.id });
         return res.json(deleted);
     } catch (error) {
         console.error(error.stack);
-        res.status(500).json({ success: false, message: `An error occurred during delete the desired ${logText}!`});
+        res.status(500).json({ success: false, message: `An error occurred during delete the desired ${logText}!` });
     }
 }

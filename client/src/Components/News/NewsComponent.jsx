@@ -1,13 +1,24 @@
 import React from "react";
+import { NewsContainerDiv, NewsDateDiv, NewsTitleDiv, NewsMessageDiv, NewInnerContainerDiv, NewsPage } from "../../Styles/News.Styled";
 
 const NewsComponent = ({ elements }) => {
 
+    const splitDate = (date) => {
+        return date.split("T")[0];
+    }
+
     return (
-        <div>
+        <NewsPage>
             {elements && elements.map(element => (
-                <h5>{element}</h5>
+                <NewsContainerDiv key={element._id}>
+                    <NewInnerContainerDiv>
+                        <NewsTitleDiv>{element.title}</NewsTitleDiv>
+                        <NewsMessageDiv>{element.message}</NewsMessageDiv>
+                        <NewsDateDiv>{splitDate(element.date)}</NewsDateDiv>
+                    </NewInnerContainerDiv>
+                </NewsContainerDiv>
             ))}
-        </div>
+        </NewsPage>
     );
 };
 

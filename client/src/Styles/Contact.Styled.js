@@ -5,25 +5,26 @@ export const ContactDivContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     min-height: 94vh;
-    @media only screen and (max-width: 1000px) {
+    @media only screen and (max-width: 1200px) {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
     };
-`;
+    `;
 
 export const MapContainer = styled.iframe`
     border-radius: 15px;
     width: 100%;
     height: 85%;
-    @media only screen and (min-width: 450px) and (max-width: 1000px) {
+    @media only screen and (min-width: 450px) and (max-width: 1200px) {
         height: 70%;
     };
     @media only screen and (max-width: 450px) {
         height: 60%;
     };
-`;
+    `;
 
 export const CardContainer = styled.div`
+    border: 1px solid white;
     position: relative;
     width: 70%;
     max-width: 600px;
@@ -36,7 +37,7 @@ export const CardContainer = styled.div`
 
 export const DescriptionContainer = styled.div`
     height: 15%;
-    @media only screen and (min-width: 450px) and (max-width: 1000px) {
+    @media only screen and (min-width: 450px) and (max-width: 1200px) {
         height: 30%;
     };
     @media only screen and (max-width: 450px) {
