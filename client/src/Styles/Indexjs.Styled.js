@@ -3,7 +3,7 @@ import backgroundImage from "../Images/cards.png";
 
 export const RouterDiv = styled.div`
     min-height: 100vh;
-    background: radial-gradient(circle, rgba(194,131,131,0.5) 0%, rgba(144,60,60,0.6) 50%, rgba(51,18,18,0.7) 100%);
+    background: radial-gradient(circle, rgba(122,12,12,0.5) 0%, rgba(79,19,19,0.7) 50%, rgba(0,0,0,1) 100%);
     background-size: cover;
     background-position: center;
     position: relative;

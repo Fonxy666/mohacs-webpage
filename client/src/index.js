@@ -15,6 +15,7 @@ import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
 import AcePokerChangeDataPage from "./Pages/AdminPages/AcePokerChangeDataPage";
 import JumboPokerChangeDataPage from "./Pages/AdminPages/JumboPokerChangeDataPage";
 import NewsPokerChangeDataPage from "./Pages/AdminPages/NewsChangeDataPage";
+import AcePokerPage from "./Pages/UserPages/AcePokerPage";
 
 const App = () => {
     const date = new Date();
@@ -27,6 +28,10 @@ const App = () => {
         {
             path: "/contact",
             element: <Contact/>
+        },
+        {
+            path: "/ace-poker",
+            element: <AcePokerPage/>
         },
         {
             path: `/${currentDate}/admin-panel`,
