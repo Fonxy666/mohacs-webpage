@@ -16,9 +16,9 @@ const sendClothToDatabase = async (cloth, token) => {
     
         if (!response.ok) {
             if (response.status === 401) {
-                alert("You are unathorized!");
+                alert("Nem vagy jogosult feltölteni!!");
             } else {
-                alert("New cloth post to database failed!");
+                alert("Valami hiva történt!");
                 console.error(`HTTP error! Status: ${response.status}`);
             }
             throw new Error(`HTTP error! Status: ${response.status}`);

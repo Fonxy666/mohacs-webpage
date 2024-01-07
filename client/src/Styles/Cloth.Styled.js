@@ -1,49 +1,42 @@
-import styled from "styled-components";
-import aceCard from "../Images/ace_card.png";
+import styled, { keyframes } from "styled-components";
+import aceCard from "../Images/ace_card.jpg";
+import jackCard from "../Images/jack_card.jpg";
 
-export const Container = styled.div`
-    margin: 5%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5%;
+const dealAnimation = keyframes`
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 `;
 
-export const ClothCard = styled.div`
-    position: relative;
-    padding: 5%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: url(${aceCard});
-        background-size: cover;
-        background-position: center;
-        opacity: 0.9;
-        border-radius: 5px;
+const getCardImage = () => {
+    const url = window.location.href.split("/")[3];
+    if (url && url === "ace-poker") {
+      return aceCard;
+    } else if (url && url === "jumbo-poker") {
+      return jackCard;
     }
+    return aceCard;
+};
+
+export const ClothCard = styled.div`
+    animation: ${dealAnimation} 0.5s ease-out;
+    animation-fill-mode: backwards;
+    background-image: url(${() => getCardImage()});
+    background-size: cover; 
+
 `;
 
 export const ClothCardImage = styled.img`
-    width: 80%;
-    align-self: flex-end;
+    width: 70%;
+    min-height: 300px;
+    height: 100%;
+    align-self: center;
     border: 1px solid black;
     border-radius: 15px;
     z-index: 1;
-`;
-
-export const ClothCardContent = styled.div`
-    color: black;
-    z-index: 1;
-`;
-
-export const ClothCardText = styled.div`
-    margin-top: 10px;
 `;

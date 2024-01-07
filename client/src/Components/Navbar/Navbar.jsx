@@ -24,7 +24,7 @@ const Navbar = () => {
                                     <Link className="dropdown-item" to="/jumbo-poker">Jumbo Poker</Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="ace-poker">Ász Poker</Link>
+                                    <Link className="dropdown-item" to="/ace-poker">Ász Poker</Link>
                                 </li>
                             </ul>
                         </li>
