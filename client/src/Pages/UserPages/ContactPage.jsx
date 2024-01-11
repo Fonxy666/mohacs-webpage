@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react';
 import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer, StyledText } from "../../Styles/Contact.Styled";
 import Navbar from "../../Components/Navbar";
+import Footer from '../../Components/Footer';
 
 const Contact = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -55,6 +56,7 @@ const Contact = () => {
                     </div>
                 </CardContainer>
             </ContactDivContainer>
+            <Footer/>
         </div>
     );
 };

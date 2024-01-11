@@ -7,6 +7,7 @@ export const RouterDiv = styled.div`
     background-size: cover;
     background-position: center;
     position: relative;
+    scroll-behavior: smooth;
     
     &:before {
         content: '';

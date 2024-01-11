@@ -1,7 +1,6 @@
 const supertest = require("supertest");
 const express = require("express");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const ClothModel = require("../database/acepokerclothes.model");
 const clothRouter = require("../routes/acePokerRoutes");

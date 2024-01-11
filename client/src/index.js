@@ -31,11 +31,11 @@ const App = () => {
             element: <Contact/>
         },
         {
-            path: "/ace-poker",
+            path: "/ace-poker/:page",
             element: <AcePokerPage/>
         },
         {
-            path: "/jumbo-poker",
+            path: "/jumbo-poker/:page",
             element: <JumboPokerPage/>
         },
         {
