@@ -6,25 +6,26 @@ import {
     ClothCardContainer
 } from "../../Styles/Cloth.Styled";
 import Pagination from "../Pagination";
-import { useParams } from 'react-router-dom';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import SideBar from "../SideBar";
 
 const ClothUserComponent = ({ elements, audiences, url }) => {
+    const navigate = useNavigate();
     const { page } = useParams();
     const [filteredElements, setFilteredElements] = useState(elements?? elements);
     const [recordPerPage, setRecordPerPage] = useState((window.innerHeight >= 1200) ? 12 : 8);
     const [paginationSlice, setPaginationSlice] = useState({first: Number(page) * recordPerPage - recordPerPage, second: Number(page) * recordPerPage});
-    const maxPriceFilter = 30000;
+    const minPriceFilter = Math.min(...elements.map(element => element.price));
+    const maxPriceFilter = Math.max(...elements.map(element => element.price));
     const [brands, setBrands] = useState([]);
     const [audienceChecked, setAudienceChecked] = useState();
     const [brandChecked, setBrandChecked] = useState();
-    const [priceFilter, setPriceFilter] = useState([1, maxPriceFilter]);
+    const [priceFilter, setPriceFilter] = useState([minPriceFilter, maxPriceFilter]);
 
-    const getBrandsFunctionForFilter = () => {
-        const uniqueBrands = [...new Set(elements.map(element => element.brand))];
-        setBrands(uniqueBrands);
-    };
+    useEffect(() => {
+        setPaginationSlice({first: Number(page) * recordPerPage - recordPerPage, second: Number(page) * recordPerPage});
+        navigate(`/${url}/1`);
+    }, [recordPerPage]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -37,30 +38,6 @@ const ClothUserComponent = ({ elements, audiences, url }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, [window.innerHeight]);
-
-    useEffect(() => {
-        getBrandsFunctionForFilter();
-    }, [elements]);
-
-    const handlePriceChange = (values) => {
-        setPriceFilter(values);
-    };
-
-    const handleAudienceCheckBoxChange = (incomingAudience, checked) => {
-        if (checked) {
-            setAudienceChecked(incomingAudience);
-        } else {
-            setAudienceChecked();
-        }
-    };
-    
-    const handleBrandCheckBoxChange = (incomingBrand, checked) => {
-        if (checked) {
-            setBrandChecked(incomingBrand);
-        } else {
-            setBrandChecked();
-        }
-    };
 
     useEffect(() => {
         if (audienceChecked && audienceChecked.length > 0 && brandChecked && brandChecked.length > 0) {
@@ -96,6 +73,44 @@ const ClothUserComponent = ({ elements, audiences, url }) => {
         }
     }, [audienceChecked, brandChecked, priceFilter]);
 
+    useEffect(() => {
+        getBrandsFunctionForFilter();
+    }, [elements]);
+
+    const handlePriceChange = (values) => {
+        setPriceFilter(values);
+    };
+
+    const handleAudienceCheckBoxChange = (incomingAudience, checked) => {
+        if (checked) {
+            setAudienceChecked(incomingAudience);
+        } else {
+            setAudienceChecked();
+        }
+    };
+    
+    const handleBrandCheckBoxChange = (incomingBrand, checked) => {
+        if (checked) {
+            setBrandChecked(incomingBrand);
+        } else {
+            setBrandChecked();
+        }
+    };
+
+    const handlePriceInputChange = (type, value) => {
+        const numericValue = Number(value);
+        if (type === 'min') {
+            setPriceFilter([numericValue, priceFilter[1]]);
+        } else if (type === 'max') {
+            setPriceFilter([priceFilter[0], numericValue]);
+        }
+    };
+    
+    const getBrandsFunctionForFilter = () => {
+        const uniqueBrands = [...new Set(elements.map(element => element.brand))];
+        setBrands(uniqueBrands);
+    };
+
     const splitPrice = (number) => {
         const price = number.toString();
 
@@ -110,70 +125,23 @@ const ClothUserComponent = ({ elements, audiences, url }) => {
 
     return (
         <section className="d-flex">
-            <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style={{ width: '220px', minHeight: "95vh" }}>
-                <div href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span className="fs-5">Ace & Jumbo Poker</span>
-                 </div>
-                <hr />
-                <ul className="nav nav-pills flex-column mb-auto">
-                    <li>
-                        <p className="d-inline-flex gap-1">
-                            <button className="btn text-white" type="button">
-                                Szürési lehetőségek
-                            </button>
-                        </p>
-                        <div className="collapsed" id="collapse">
-                            <div className="card card-body">
-                                <label className="form-label text-black">Tipus:</label>
-                                {audiences && audiences.map((audience, index) => (
-                                    <div className="form-check form-switch text-black" key={index}>
-                                        <input 
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            id={`flexSwitchCheckDefault_${index}`}
-                                            onChange={(event) => handleAudienceCheckBoxChange(audience, event.target.checked)}
-                                            checked={audienceChecked === audience}/>
-                                        <label className="form-check-label" htmlFor={`flexSwitchCheckDefault_${index}`}>{audience}</label>
-                                    </div>
-                                ))}
-                                <hr/>
-                                <div>
-                                    <label htmlFor="price-range" className="form-label text-black">Ár: <br/>{priceFilter[0]} - {priceFilter[1]}</label>
-                                    <Slider
-                                        range
-                                        min={1}
-                                        max={maxPriceFilter}
-                                        defaultValue={[1, maxPriceFilter]}
-                                        value={priceFilter}
-                                        onChange={handlePriceChange}/>
-                                </div>
-                                <div>
-                                    <label className="form-label text-black">Márka:</label>
-                                    {brands && brands.map((brand, index) => (
-                                        <div className="form-check form-switch text-black" key={index}>
-                                        <input 
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            id={`flexSwitchCheckDefault_${index}`}
-                                            onChange={(event) => handleBrandCheckBoxChange(brand, event.target.checked)}
-                                            checked={brandChecked === brand}/>
-                                        <label className="form-check-label" htmlFor={`flexSwitchCheckDefault_${index}`}>{brand}</label>
-                                    </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <hr />
-                <hr />
-            </div>
+            <SideBar
+                audiences = { audiences }
+                brands = { brands }
+                audienceChecked = {audienceChecked}
+                handleAudienceCheckBoxChange = { handleAudienceCheckBoxChange }
+                priceFilter = { priceFilter }
+                handlePriceInputChange = { handlePriceInputChange }
+                maxPriceFilter = { maxPriceFilter }
+                handlePriceChange = { handlePriceChange }
+                handleBrandCheckBoxChange = { handleBrandCheckBoxChange }
+                brandChecked = { brandChecked }/>
             <div className="container py-5">
-                <div className="row justify-content-center">
+                <div className="row justify-content-center shadow-lg">
                     {filteredElements && filteredElements.slice(paginationSlice.first, paginationSlice.second).map((element, index) => (
                         <ClothCardContainer key={`${index}-${page}-${element.id}-${recordPerPage}-${audienceChecked}`}>
                             <ClothCard
-                                className="card text-black"
+                                className="card text-black shadow-lg bg-body rounded"
                                 style={{ animationDelay: `${index * 0.2}s` }}>
                                 <StyledDiv>
                                 <ClothCardImage

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Loading from "../../Components/Loading";
 import Navbar from "../../Components/Navbar";
 import ClothUserComponent from "../../Components/ClothUserComponent/ClothUserComponent";
-import Footer from "../../Components/Footer";
 
 const getClothes = async () => {
     try {
@@ -49,7 +48,7 @@ useEffect(() => {
         ) : (
             <div>
                 <Navbar/>
-                <ClothUserComponent 
+                <ClothUserComponent
                     elements = {clothes.data}
                     audiences = {["ferfi", "noi"]}
                     url = { "ace-poker" }/>
