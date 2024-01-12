@@ -23,7 +23,6 @@ const ClothUserComponent = ({ elements, url }) => {
     const [brandChecked, setBrandChecked] = useState();
     const [priceFilter, setPriceFilter] = useState([minPriceFilter, maxPriceFilter]);
     const [elementCountInThisPage, setElementCountInThisPage] = useState();
-    const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         setPaginationSlice({first: Number(page) * recordPerPage - recordPerPage, second: Number(page) * recordPerPage});
@@ -36,7 +35,8 @@ const ClothUserComponent = ({ elements, url }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowInnerWidth(window.innerWidth);
+            setRecordPerPage((window.innerHeight >= 1200 && window.innerWidth >= 1920) ? 12 : 
+                (window.innerHeight >= 900 && window.innerWidth >= 1420) ? 8 : 6);
         };
 
         window.addEventListener('resize', handleResize);
@@ -44,19 +44,7 @@ const ClothUserComponent = ({ elements, url }) => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [window.innerWidth]);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setRecordPerPage((window.innerHeight >= 1200) ? 12 : 8);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [window.innerHeight]);
+    }, [window.innerHeight, window.innerWidth]);
 
     useEffect(() => {
         if (audienceChecked && audienceChecked.length > 0 && brandChecked && brandChecked.length > 0) {
@@ -146,17 +134,44 @@ const ClothUserComponent = ({ elements, url }) => {
 
     return (
         <section className="d-flex">
-            <SideBar
-                audiences = { audiences }
-                brands = { brands }
-                audienceChecked = {audienceChecked}
-                handleAudienceCheckBoxChange = { handleAudienceCheckBoxChange }
-                priceFilter = { priceFilter }
-                handlePriceInputChange = { handlePriceInputChange }
-                maxPriceFilter = { maxPriceFilter }
-                handlePriceChange = { handlePriceChange }
-                brandChecked = { brandChecked }
-                handleBrandCheckBoxChange = { handleBrandCheckBoxChange }/>
+            {window.innerWidth > 1150 ? (
+                <SideBar
+                    audiences = { audiences }
+                    brands = { brands }
+                    audienceChecked = {audienceChecked}
+                    handleAudienceCheckBoxChange = { handleAudienceCheckBoxChange }
+                    priceFilter = { priceFilter }
+                    handlePriceInputChange = { handlePriceInputChange }
+                    maxPriceFilter = { maxPriceFilter }
+                    handlePriceChange = { handlePriceChange }
+                    brandChecked = { brandChecked }
+                    handleBrandCheckBoxChange = { handleBrandCheckBoxChange }/>
+            ) : (
+                <div>
+                    <button className="btn btn-dark mt-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-filter" viewBox="0 0 16 16">
+                            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </button>
+                    <div className="offcanvas bg-dark dark offcanvas-start" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style={{maxWidth: "260px"}}>
+                        <div className="offcanvas-body">
+                            <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel"></h5>
+                            <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <SideBar
+                                audiences = { audiences }
+                                brands = { brands }
+                                audienceChecked = {audienceChecked}
+                                handleAudienceCheckBoxChange = { handleAudienceCheckBoxChange }
+                                priceFilter = { priceFilter }
+                                handlePriceInputChange = { handlePriceInputChange }
+                                maxPriceFilter = { maxPriceFilter }
+                                handlePriceChange = { handlePriceChange }
+                                brandChecked = { brandChecked }
+                                handleBrandCheckBoxChange = { handleBrandCheckBoxChange }/>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className="container py-4">
                 <div className="row justify-content-center shadow-lg pt-4">
                     {filteredElements && filteredElements.slice(paginationSlice.first, paginationSlice.second).map((element, index) => (
@@ -182,7 +197,6 @@ const ClothUserComponent = ({ elements, url }) => {
                             </ClothCard>
                         </ClothCardContainer>
                     ))}
-                    {console.log(window.innerWidth)}
                     <div className="d-flex justify-content-center" style={{marginTop: `${elementCountInThisPage < 5 && window.innerWidth > 1000 ? "390px" : "20px"}`}} >
                         <Pagination
                             allElementCount = {filteredElements.length}
