@@ -49,8 +49,7 @@ useEffect(() => {
             <div>
                 <Navbar/>
                 <ClothUserComponent
-                    elements = {clothes.data}
-                    audiences = {["ferfi", "noi"]}
+                    elements = { clothes.data }
                     url = { "ace-poker" }/>
             </div>
         )}

@@ -50,7 +50,6 @@ useEffect(() => {
                 <Navbar/>
                 <ClothUserComponent
                     elements = {clothes.data}
-                    audiences = {["noi", "ferfi"]}
                     url = { "jumbo-poker" }/>
             </div>
         )}

@@ -72,4 +72,4 @@ export const ClothCardContainer = styled.div`
     align-items: center;
     margin-bottom: 30px;
     max-width: 300px;
-`
+`;

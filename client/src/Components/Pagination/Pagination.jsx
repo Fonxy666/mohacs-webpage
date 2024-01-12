@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Pagination = ({ elementCount, url, page, recordPerPage, setPaginationSlice, nextButtonDisable }) => {
+const Pagination = ({ allElementCount, url, page, recordPerPage, setPaginationSlice, elementCount }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Pagination = ({ elementCount, url, page, recordPerPage, setPaginationSlice
         navigate(`/${url}/${Number(page) + 1}`);
     };
 
-    const totalPages = Math.ceil(elementCount / recordPerPage);
+    const totalPages = Math.ceil(allElementCount / recordPerPage);
     const displayPages = 2;
 
     const getPageRange = () => {
@@ -54,7 +54,7 @@ const Pagination = ({ elementCount, url, page, recordPerPage, setPaginationSlice
                         </a>
                     </li>
                 ))}
-                <li className={`page-item ${nextButtonDisable < recordPerPage ? 'disabled' : ''}`}>
+                <li className={`page-item ${elementCount < recordPerPage ? 'disabled' : ''}`}>
                     <a className="page-link" aria-label="Next" onClick={() => handleNextButton()}>
                         <span aria-hidden="true">&raquo;</span>
                     </a>

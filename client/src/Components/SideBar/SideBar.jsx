@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { SideBarContainer } from '../../Styles/SideBar.Styled';
 
 const SideBar = ({ audiences, brands, audienceChecked, handleAudienceCheckBoxChange, priceFilter, handlePriceInputChange, maxPriceFilter, handlePriceChange, handleBrandCheckBoxChange, brandChecked }) => {
     
     return (
-        <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style={{ width: '220px', minHeight: "95vh" }}>
+        <SideBarContainer className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style={{ width: '220px', minHeight: "95vh" }}>
             <div className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span className="fs-5">Ace & Jumbo Poker</span>
-                </div>
+            </div>
             <hr />
             <ul className="nav nav-pills flex-column mb-auto">
                 <li>
@@ -79,7 +80,7 @@ const SideBar = ({ audiences, brands, audienceChecked, handleAudienceCheckBoxCha
             </ul>
             <hr />
             <hr />
-        </div>
+        </SideBarContainer>
     )
 }
 
