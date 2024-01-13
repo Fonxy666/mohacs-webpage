@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+    const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+    const [innerHeight, setInnerHeight] = useState(window.innerHeight);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setInnerWidth(window.innerWidth);
+            setInnerHeight(window.innerHeight);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [window.innerHeight, window.innerWidth]);
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger" style={{height: "5vh"}}>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger" style={ innerWidth > innerHeight && innerWidth < 1200 ? {} : {height: "5vh"}}>
             <div className="container-fluid">
                 <a className="navbar-brand">LOGO</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

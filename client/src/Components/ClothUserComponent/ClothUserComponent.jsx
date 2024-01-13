@@ -14,7 +14,9 @@ const ClothUserComponent = ({ elements, url }) => {
     const [ audiences, setAudiences] = useState([])
     const { page } = useParams();
     const [filteredElements, setFilteredElements] = useState(elements?? elements);
-    const [recordPerPage, setRecordPerPage] = useState((window.innerHeight >= 1200) ? 12 : 8);
+    const [recordPerPage, setRecordPerPage] = useState((window.innerHeight >= 1200 && window.innerWidth >= 1920) ? 12 : 
+        (window.innerHeight >= 1200 && window.innerWidth >= 1000) ? 9 :
+        (window.innerHeight >= 900 && window.innerWidth >= 1420) ? 8 : 6);
     const [paginationSlice, setPaginationSlice] = useState({first: Number(page) * recordPerPage - recordPerPage, second: Number(page) * recordPerPage});
     const minPriceFilter = Math.min(...elements.map(element => element.price));
     const maxPriceFilter = Math.max(...elements.map(element => element.price));
@@ -36,6 +38,7 @@ const ClothUserComponent = ({ elements, url }) => {
     useEffect(() => {
         const handleResize = () => {
             setRecordPerPage((window.innerHeight >= 1200 && window.innerWidth >= 1920) ? 12 : 
+                (window.innerHeight >= 1200 && window.innerWidth >= 1000) ? 9 :
                 (window.innerHeight >= 900 && window.innerWidth >= 1420) ? 8 : 6);
         };
 
@@ -149,7 +152,7 @@ const ClothUserComponent = ({ elements, url }) => {
             ) : (
                 <div>
                     <button className="btn btn-dark mt-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-filter" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-filter" viewBox="0 0 16 16">
                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
                         </svg>
                     </button>
