@@ -8,11 +8,11 @@ Variables you need in the .env:
 - TOKEN_SECRET=
 After you created this variables, you are ready to run the application.
 
-#tests
+# tests
 To run the teswts with coverage you need to go to the /server/tests folder, and then run the following command: npm run coverage
 
-#server
+# server
 After you created the .env, you are able to run "node server.js" in the /server folder.
 
-#client
+# client
 After you go to the ./client folder, you are able to run the frontend server with running the npm start command.
