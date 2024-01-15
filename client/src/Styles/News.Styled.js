@@ -24,6 +24,10 @@ export const NewsTitleDiv = styled.div`
     font-size: 25px;
     font-weight: 25px;
     background-color: rgba(237, 26, 68, 0.2);
+    @media only screen and (min-width: 350px) and (max-width: 1200px) {
+        font-size: 20px;
+        font-weight: 20px;
+    };
 `;
 
 export const NewsMessageDiv = styled.div`
@@ -32,13 +36,25 @@ export const NewsMessageDiv = styled.div`
     color: black;
     padding-left: 2.5%;
     min-height: 5vh;
+    @media only screen and (min-width: 350px) and (max-width: 1200px) {
+        font-size: 15px;
+    };
 `;
 
 export const NewsDateDiv = styled.div`
     background-color: #ffbdbf;
     color: white;
-    padding-left: 90%;
+    padding-left: 80%;
     font-size: 20px;
     color: black;
     font-style: italic;
+    @media only screen and (min-width: 350px) and (max-width: 1200px) {
+        font-size: 15px;
+    };
+    @media only screen and (min-width: 500px) and (max-width: 800px) {
+        padding-left: 70%;
+    };
+    @media only screen and (min-width: 350px) and (max-width: 500px) {
+        padding-left: 60%;
+    };
 `;
