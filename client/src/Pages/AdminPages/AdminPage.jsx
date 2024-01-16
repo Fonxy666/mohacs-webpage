@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../../Components/Navbar";
 import LoginForm from "../../Components/LoginForm";
+import { StyledDiv } from "../../Styles/AdminPage.Styled";
 
 const sendLoginRequest = async (user) => {
     try {
@@ -53,7 +54,7 @@ const AdminPage = () => {
             <Navbar/>
             {jwtToken && role === "Admin" ? (
                 <div>
-                    <div className="dropdown">
+                    <StyledDiv className="dropdown">
                         <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Ász póker ruhák kezelése
                         </button>
@@ -65,8 +66,8 @@ const AdminPage = () => {
                                 <Link to={"./ace-poker/modification"} className="dropdown-item">Módosítás / Törlés</Link>
                             </li>
                         </ul>
-                    </div>
-                    <div className="dropdown">
+                    </StyledDiv>
+                    <StyledDiv className="dropdown">
                         <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Jumbó póker ruhák kezelése
                         </button>
@@ -78,8 +79,18 @@ const AdminPage = () => {
                                 <Link to={"./jumbo-poker/modification"} className="dropdown-item">Módosítás / Törlés</Link>
                             </li>
                         </ul>
-                    </div>
-                    <div className="dropdown">
+                    </StyledDiv>
+                    <StyledDiv className="dropdown">
+                        <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Feltöltés mind a kettő boltba
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li>
+                                <Link to={"./both/upload"} className="dropdown-item">Feltöltés</Link>
+                            </li>
+                        </ul>
+                    </StyledDiv>
+                    <StyledDiv className="dropdown">
                         <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Hírek kezelése
                         </button>
@@ -91,7 +102,7 @@ const AdminPage = () => {
                                 <Link to={"./new/modification"} className="dropdown-item">Módosítás / Törlés</Link>
                             </li>
                         </ul>
-                    </div>
+                    </StyledDiv>
                 </div>
             ) : (
                 <LoginForm

@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../../Components/Loading";
 import Navbar from "../../Components/Navbar";
-import NewsComponent from "../../Components/News";
-import Footer from "../../Components/Footer";
+import ClothUserComponent from "../../Components/ClothUserComponent/ClothUserComponent";
 
-const getNews = async () => {
+const getClothes = async () => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/news/newest", {
+        const response = await fetch("http://localhost:8080/v1/api/jumbo-poker/clothes", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             },
         });
-
         if (!response.ok) {
             console.error(`HTTP error! Status: ${response.status}`);
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
-        return await response.json();
+        const responseData = await response.json();
+        return { success: true, data: responseData };
     } catch (error) {
         console.error("Post failed:", error.message);
         throw error;
     }
 };
 
-const NewsPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [news, setNews] = useState([]);
+const JumboPokerPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [clothes, setClothes] = useState([]);
 
   const fetchData = async () => {
     try {
-        const newsData = await getNews();
-        setNews(newsData);
+        const clothesData = await getClothes();
+        setClothes(clothesData);
         setLoading(false);
     } catch (error) {
         setLoading(false);
@@ -50,13 +48,13 @@ useEffect(() => {
         ) : (
             <div>
                 <Navbar/>
-                <NewsComponent 
-                    elements = {news}/>
-                <Footer/>
+                <ClothUserComponent
+                    elements = {clothes.data}
+                    url = { "jumbo-poker" }/>
             </div>
         )}
     </div>
   );
 };
 
-export default NewsPage;
+export default JumboPokerPage;

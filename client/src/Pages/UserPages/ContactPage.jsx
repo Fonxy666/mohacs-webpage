@@ -1,29 +1,33 @@
 import React, { useState, useEffect  } from 'react';
 import { ContactDivContainer, MapContainer, CardContainer, DescriptionContainer, StyledText } from "../../Styles/Contact.Styled";
 import Navbar from "../../Components/Navbar";
+import Footer from '../../Components/Footer';
 
 const Contact = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const telephoneNumber = 
+
     useEffect(() => {
         const handleResize = () => {
-          setWindowWidth(window.innerWidth);
+            setWindowWidth(window.innerWidth);
         };
     
         window.addEventListener('resize', handleResize);
     
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
       }, []);
 
-    const telephoneContent = windowWidth <= 380 ?
-    (
-        <>
-        Telephone: <br/>+(06-20)-222-3333
-        </>
-    ) : (
-        'Telephone: +(06-20)-222-3333'
-    );
+    const telephoneStyle = (number) => {
+        return windowWidth <= 380 ? (
+            <>
+                Telefon: <br/>{number}
+            </>
+        ) : (
+            `Telefon: ${number}`
+        );
+    }
 
 
     return (
@@ -33,28 +37,29 @@ const Contact = () => {
                 <CardContainer className="card">
                     <div className="card-body">
                         <DescriptionContainer>
-                            <StyledText>Jumbo poker</StyledText>
-                            <StyledText>E-mail: example@example.com</StyledText>
-                            <StyledText>{telephoneContent}</StyledText>
+                            <StyledText>Jumbó póker</StyledText>
+                            <StyledText>E-mail: posztjozsef@vipmail.hu</StyledText>
+                            <StyledText>{telephoneStyle("+(06-30)-247-6579")}</StyledText>
                         </DescriptionContainer>
                         <MapContainer
                             id="AcePoker"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2757.9487590318513!2d20.18545!3d46.2711226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744629e0c8ea50d%3A0xd6b87073d1234939!2sSzeged%2C%20Kankalin%20u.%206%2C%206753!5e0!3m2!1shu!2shu!4v1703070636019!5m2!1shu!2shu"/>
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2772.04368651778!2d18.686278400000003!3d45.990356999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4742d6b2bfe17f1d%3A0x5800fbf1a5be61aa!2zTW9ow6FjcywgU3phYmFkc8OhZyB1LiA0MiwgNzcwMA!5e0!3m2!1shu!2shu!4v1705324709983!5m2!1shu!2shu"/>
                     </div>
                 </CardContainer>
                 <CardContainer className="card">
                     <div className="card-body">
                         <DescriptionContainer>
-                            <StyledText>Ace poker</StyledText>
-                            <StyledText>E-mail: example@example.com</StyledText>
-                            <StyledText>{telephoneContent}</StyledText>
+                            <StyledText>Ász póker</StyledText>
+                            <StyledText>E-mail: posztjozsef@vipmail.hu</StyledText>
+                            <StyledText>{telephoneStyle("+(06-30)-288-7792")}</StyledText>
                         </DescriptionContainer>
                         <MapContainer
                             id="JumboPoker"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2757.9445623492516!2d20.1853055!3d46.27120599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744629e0d22b0af%3A0x4ec199749e0a5fda!2sSzeged%2C%20Kankalin%20u.%208%2C%206753!5e0!3m2!1shu!2shu!4v1703071587144!5m2!1shu!2shu"/>
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2772.0357983685894!2d18.684704600000003!3d45.9905145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4742d6b2b59866e7%3A0x1b5344f098ca4cd3!2zTW9ow6FjcywgRMOzenNhIEd5w7ZyZ3kgdS4gMTAsIDc3MDA!5e0!3m2!1shu!2shu!4v1705327281975!5m2!1shu!2shu"/>
                     </div>
                 </CardContainer>
             </ContactDivContainer>
+            <Footer/>
         </div>
     );
 };

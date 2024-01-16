@@ -15,6 +15,10 @@ import NewsModifyPage from "./Pages/AdminPages/NewsModifyPage";
 import AcePokerChangeDataPage from "./Pages/AdminPages/AcePokerChangeDataPage";
 import JumboPokerChangeDataPage from "./Pages/AdminPages/JumboPokerChangeDataPage";
 import NewsPokerChangeDataPage from "./Pages/AdminPages/NewsChangeDataPage";
+import AcePokerPage from "./Pages/UserPages/AcePokerPage";
+import JumboPokerPage from "./Pages/UserPages/JumboPokerPage";
+import HomePage from "./Pages/UserPages/HomePage";
+import UploadToBothShopPage from "./Pages/AdminPages/UploadToBothShopPage";
 
 const App = () => {
     const date = new Date();
@@ -22,11 +26,23 @@ const App = () => {
     const router = createBrowserRouter([
         {
             path: "/",
+            element: <HomePage/>
+        },
+        {
+            path: "/news",
             element: <NewsPage/>
         },
         {
             path: "/contact",
             element: <Contact/>
+        },
+        {
+            path: "/ace-poker/:page",
+            element: <AcePokerPage/>
+        },
+        {
+            path: "/jumbo-poker/:page",
+            element: <JumboPokerPage/>
         },
         {
             path: `/${currentDate}/admin-panel`,
@@ -67,6 +83,10 @@ const App = () => {
         {
             path: `/${currentDate}/admin-panel/new/modification/:id`,
             element: <NewsPokerChangeDataPage/>
+        },
+        {
+            path: `/${currentDate}/admin-panel/both/upload`,
+            element: <UploadToBothShopPage/>
         }
     ]);
 

@@ -3,7 +3,34 @@ import { useNavigate } from "react-router-dom";
 import ClothForm from "../../Components/ClothForm"
 import Cookies from "js-cookie";
 
-const sendClothToDatabase = async (cloth, token) => {
+const sendClothToJumboPokerDatabase = async (cloth, token) => {
+    try {
+        const response = await fetch("http://localhost:8080/v1/api/ace-poker/upload", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `${token}`
+            },
+            body: JSON.stringify(cloth),
+        });
+    
+        if (!response.ok) {
+            if (response.status === 401) {
+                alert("Nem vagy jogosult feltölteni!!");
+            } else {
+                alert("Valami hiva történt!");
+                console.error(`HTTP error! Status: ${response.status}`);
+            }
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        return await response.json();
+    } catch (error) {
+        console.error("Post failed:", error.message);
+    }
+};
+
+const sendClothToAcePokerDatabase = async (cloth, token) => {
     try {
         const response = await fetch("http://localhost:8080/v1/api/jumbo-poker/upload", {
             method: "POST",
@@ -30,17 +57,21 @@ const sendClothToDatabase = async (cloth, token) => {
     }
 };
 
-const JumboPokerUploadPage = () => {
+const UploadToBothShopPage = () => {
     const navigate = useNavigate();
     const date = new Date();
 
     const handleSubmit = (element) => {
         const token = Cookies.get("jwtToken");
-        sendClothToDatabase(element, token)
-        .then(() => {
-            navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
-            alert("Ruha sikeresen feltöltve!");
+        sendClothToJumboPokerDatabase(element, token)
+        .then((data) => {
+            alert("Ruha sikeresen feltöltve az első boltba!");
         });
+        sendClothToAcePokerDatabase(element, token)
+        .then(() => {
+            alert("Ruha sikeresen feltöltve mind a kettő boltba!");
+            navigate(`/${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}/admin-panel`);
+        })
     }
 
     const handleCancel = () => {
@@ -50,11 +81,11 @@ const JumboPokerUploadPage = () => {
     return (
         <div>
             <ClothForm
-                onSave={(e) => handleSubmit(e)}
-                onCancel={() => handleCancel()}
-                audienceOptions={["noi", "ferfi"]}/>
+                onSave = { (e) => handleSubmit(e) }
+                onCancel = { () => handleCancel() }
+                audienceOptions={["Női"]}/>
         </div>
     );
 };
 
-export default JumboPokerUploadPage;
+export default UploadToBothShopPage;
