@@ -13,10 +13,17 @@ const Pagination = ({ allElementCount, url, page, recordPerPage, setPaginationSl
 
     const handlePreviousButton = () => {
         navigate(`/${url}/${Number(page) - 1}`);
+        window.scrollTo({top: "0px"});
     };
+
+    const handlePageClick = (pageNumber) => {
+        navigate(`/${url}/${pageNumber}`);
+        window.scrollTo({top: "0px"});
+    }
 
     const handleNextButton = () => {
         navigate(`/${url}/${Number(page) + 1}`);
+        window.scrollTo({top: "0px"});
     };
 
     const totalPages = Math.ceil(allElementCount / recordPerPage);
@@ -49,7 +56,7 @@ const Pagination = ({ allElementCount, url, page, recordPerPage, setPaginationSl
                 </li>
                 {pageNumbers.map((pageNumber) => (
                     <li key={pageNumber} className={`page-item ${pageNumber === Number(page) ? 'active' : ''}`}>
-                        <a className={`page-link ${pageNumber === Number(page) ? 'bg-danger text-white' : 'text-dark'}`} onClick={() => navigate(`/${url}/${pageNumber}`)}>
+                        <a className={`page-link ${pageNumber === Number(page) ? 'bg-danger text-white' : 'text-dark'}`} onClick={() => handlePageClick(pageNumber)}>
                             {pageNumber}
                         </a>
                     </li>

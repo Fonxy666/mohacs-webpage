@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
-    const [innerHeight, setInnerHeight] = useState(window.innerHeight);
 
     useEffect(() => {
         const handleResize = () => {
             setInnerWidth(window.innerWidth);
-            setInnerHeight(window.innerHeight);
         };
 
         window.addEventListener('resize', handleResize);
@@ -19,7 +17,7 @@ const Navbar = () => {
     }, [window.innerHeight, window.innerWidth]);
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger" style={ innerWidth > innerHeight && innerWidth < 1200 ? {} : {height: "5vh"}}>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger" style={ innerWidth < 1250 ? {} : {height: "5vh"}}>
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -27,7 +25,10 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link active" to="/">Hírek</Link>
+                            <Link className="nav-link active" to="/">Otthon</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/news">Hírek</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

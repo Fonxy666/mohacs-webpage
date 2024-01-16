@@ -17,6 +17,8 @@ import JumboPokerChangeDataPage from "./Pages/AdminPages/JumboPokerChangeDataPag
 import NewsPokerChangeDataPage from "./Pages/AdminPages/NewsChangeDataPage";
 import AcePokerPage from "./Pages/UserPages/AcePokerPage";
 import JumboPokerPage from "./Pages/UserPages/JumboPokerPage";
+import HomePage from "./Pages/UserPages/HomePage";
+import UploadToBothShopPage from "./Pages/AdminPages/UploadToBothShopPage";
 
 const App = () => {
     const date = new Date();
@@ -24,6 +26,10 @@ const App = () => {
     const router = createBrowserRouter([
         {
             path: "/",
+            element: <HomePage/>
+        },
+        {
+            path: "/news",
             element: <NewsPage/>
         },
         {
@@ -77,6 +83,10 @@ const App = () => {
         {
             path: `/${currentDate}/admin-panel/new/modification/:id`,
             element: <NewsPokerChangeDataPage/>
+        },
+        {
+            path: `/${currentDate}/admin-panel/both/upload`,
+            element: <UploadToBothShopPage/>
         }
     ]);
 
