@@ -9,7 +9,7 @@ Variables you need in the .env:
 After you created this variables, you are ready to run the application.
 
 # tests
-To run the teswts with coverage you need to go to the /server/tests folder, and then run the following command: npm run coverage
+To run the tests with coverage you need to go to the /server/tests folder, and then run the following command: npm run coverage
 
 # server
 After you created the .env, you are able to run "node server.js" in the /server folder.
