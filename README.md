@@ -12,7 +12,7 @@ After you created this variables, you are ready to run the application.
 To run the tests with coverage you need to go to the /server/tests folder, and then run the following command: npm run coverage
 
 # server
-After you created the .env, you are able to run "node server.js" in the /server folder.
+After you created the .env, and installed the dependencies with "npm i" you are able to run "node server.js" in the /server folder.
 
 # client
-After you go to the ./client folder, you are able to run the frontend server with running the npm start command.
+After you go to the ./client folder and installed dependencies with "npm i" command, you are able to run the frontend server with running the npm start command.
