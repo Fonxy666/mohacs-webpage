@@ -10,6 +10,12 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [priceError, setPriceError] = useState("");
 
+    useEffect(() => {
+        if (audienceOptions.length <= 1) {
+            setAudience(audienceOptions[0]);
+        }
+    }, []);
+
     const convertImageToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -99,17 +105,27 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="audience">Közönség:</label>
-                <select
-                    className="form-select"
-                    onChange={(e) => setAudience(e.target.value)}
-                    name = "audience"
-                    id = "audience"
-                    value = {audience}>
-                    {audience === "" && <option>Válassz egyet!</option>}
-                    {audienceOptions.map((option) => (
-                        <option key={option}>{option}</option>
-                    ))}
-                </select>
+                {audienceOptions && audienceOptions.length > 1 ? (
+                    <select
+                        className="form-select"
+                        onChange={(e) => setAudience(e.target.value)}
+                        name = "audience"
+                        id = "audience"
+                        value = {audience}>
+                        {audience === "" && <option>Válassz egyet!</option>}
+                        {audienceOptions.map((option) => (
+                            <option key={option}>{option}</option>
+                        ))}
+                    </select>
+                ) : (
+                    <fieldset disabled>
+                        <input
+                            type="text"
+                            id="disabledTextInput"
+                            className="form-control"
+                            defaultValue={audience}/>
+                    </fieldset>
+                )}
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="image">Kép:</label>

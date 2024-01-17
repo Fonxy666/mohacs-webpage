@@ -59,7 +59,7 @@ const AcePokerChangeDataPage = () => {
                 onSave = { (e) => handleModification(e) }
                 onCancel = { () => handleCancel() }
                 cloth = { cloth }
-                audienceOptions={["noi", "ferfi"]}/>
+                audienceOptions={["Női", "Gyerek"]}/>
         </div>
     );
 };

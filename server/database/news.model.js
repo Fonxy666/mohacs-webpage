@@ -7,7 +7,8 @@ const NewModel = new Schema({
         type: Date,
         default: Date.now
     },
-    message: String
+    message: String,
+    image: String
 }, {versionKey: false});
 
 const News = model("News Model", NewModel, "News");

@@ -52,7 +52,7 @@ const JumboPokerUploadPage = () => {
             <ClothForm
                 onSave={(e) => handleSubmit(e)}
                 onCancel={() => handleCancel()}
-                audienceOptions={["noi", "ferfi"]}/>
+                audienceOptions={["Női", "Gyerek"]}/>
         </div>
     );
 };

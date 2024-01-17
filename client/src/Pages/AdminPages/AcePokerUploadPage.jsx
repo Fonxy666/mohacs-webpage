@@ -54,7 +54,7 @@ const AcePokerUploadPage = () => {
             <ClothForm
                 onSave={(e) => handleSubmit(e)}
                 onCancel={() => handleCancel()}
-                audienceOptions={["noi", "ferfi"]}/>
+                audienceOptions={["Női", "Férfi"]}/>
         </div>
     );
 };

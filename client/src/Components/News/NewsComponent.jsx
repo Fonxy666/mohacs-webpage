@@ -1,5 +1,5 @@
 import React from "react";
-import { NewsContainerDiv, NewsDateDiv, NewsTitleDiv, NewsMessageDiv, NewInnerContainerDiv, NewsPage } from "../../Styles/News.Styled";
+import { NewsContainerDiv, NewsDateDiv, NewsTitleDiv, NewsMessageDiv, NewInnerContainerDiv, NewsPage, NewsImage, NewsBodyContainer } from "../../Styles/News.Styled";
 
 const NewsComponent = ({ elements }) => {
 
@@ -13,7 +13,10 @@ const NewsComponent = ({ elements }) => {
                 <NewsContainerDiv key={element._id}>
                     <NewInnerContainerDiv>
                         <NewsTitleDiv>{element.title}</NewsTitleDiv>
-                        <NewsMessageDiv>{element.message}</NewsMessageDiv>
+                        <NewsBodyContainer>
+                            {element.image && <NewsImage src={element.image} alt="image"/>}
+                            <NewsMessageDiv>{element.message}</NewsMessageDiv>
+                        </NewsBodyContainer>
                         <NewsDateDiv>{splitDate(element.date)}</NewsDateDiv>
                     </NewInnerContainerDiv>
                 </NewsContainerDiv>
