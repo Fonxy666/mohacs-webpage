@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 const getClothes = async () => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/ace-poker/clothes", {
+        const response = await fetch("https://localhost:3443/v1/api/ace-poker/clothes", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ const getClothes = async () => {
 
 const deleteCloth = async (id, token) => {
     try {
-        const response = await fetch(`http://localhost:8080/v1/api/ace-poker/${id}/delete`, {
+        const response = await fetch(`https://localhost:3443/v1/api/ace-poker/${id}/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

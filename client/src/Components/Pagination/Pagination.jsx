@@ -56,7 +56,7 @@ const Pagination = ({ allElementCount, url, page, recordPerPage, setPaginationSl
                 </li>
                 {pageNumbers.map((pageNumber) => (
                     <li key={pageNumber} className={`page-item ${pageNumber === Number(page) ? 'active' : ''}`}>
-                        <a className={`page-link ${pageNumber === Number(page) ? 'bg-danger text-white' : 'text-dark'}`} onClick={() => handlePageClick(pageNumber)}>
+                        <a className={`page-link ${pageNumber === Number(page) ? 'bg-danger text-white' : 'text-dark'}`} onClick={() => handlePageClick(pageNumber)} type="media_type">
                             {pageNumber}
                         </a>
                     </li>

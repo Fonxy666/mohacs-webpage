@@ -6,7 +6,7 @@ import NewsForm from "../../Components/NewsForm";
 
 const modifyExistingCloth = async (information, token) => {
     try {
-        const response = await fetch(`http://localhost:8080/v1/api/news/${information._id}/update`, {
+        const response = await fetch(`https://localhost:3443/v1/api/news/${information._id}/update`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

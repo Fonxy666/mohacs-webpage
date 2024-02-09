@@ -6,7 +6,7 @@ import Footer from "../../Components/Footer";
 
 const getNews = async () => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/news/newest", {
+        const response = await fetch("https://localhost:3443/v1/api/news/newest", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
