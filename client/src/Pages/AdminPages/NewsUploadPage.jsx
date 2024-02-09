@@ -5,7 +5,7 @@ import NewsForm from "../../Components/NewsForm/NewsForm";
 
 const sendInformationToDatabase = async (information, token) => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/news/upload", {
+        const response = await fetch("https://localhost:3443/v1/api/news/upload", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

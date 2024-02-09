@@ -7,7 +7,7 @@ import { StyledDiv } from "../../Styles/AdminPage.Styled";
 
 const sendLoginRequest = async (user) => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/users/login", {
+        const response = await fetch("https://localhost:3443/v1/api/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

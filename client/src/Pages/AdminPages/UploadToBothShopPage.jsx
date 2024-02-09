@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 const sendClothToJumboPokerDatabase = async (cloth, token) => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/ace-poker/upload", {
+        const response = await fetch("https://localhost:3443/v1/api/ace-poker/upload", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const sendClothToJumboPokerDatabase = async (cloth, token) => {
 
 const sendClothToAcePokerDatabase = async (cloth, token) => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/jumbo-poker/upload", {
+        const response = await fetch("https://localhost:3443/v1/api/jumbo-poker/upload", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

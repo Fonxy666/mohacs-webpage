@@ -3,7 +3,8 @@ import {
     ClothCardImage,
     ClothCard,
     StyledDiv,
-    ClothCardContainer
+    ClothCardContainer,
+    CLothNamesAndAudiences
 } from "../../Styles/Cloth.Styled";
 import Pagination from "../Pagination";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -191,7 +192,7 @@ const ClothUserComponent = ({ elements, url }) => {
                                     alt={element.name}/>
                                 <div className="card-body pb 5">
                                     <div className="text-center">
-                                        <h5 className="card-title">{element.audience} {element.name}</h5>
+                                        <CLothNamesAndAudiences className="card-title">{element.audience} {element.name}</CLothNamesAndAudiences>
                                         <p className="text-muted mb-4">{element.brand}</p>
                                     </div>
                                     <div className="d-flex justify-content-between total font-weight-bold mt-4">

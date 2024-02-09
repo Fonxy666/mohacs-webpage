@@ -30,16 +30,18 @@ export const ClothCard = styled.div`
     background-repeat: no-repeat;
     min-height: 340px;
     background-size: 100% 100%;
-    width: 90%;
+    width: 85%;
     border-radius: 10px;
-    border: 2px solid black;
 `;
+
+export const CLothNamesAndAudiences = styled.h5`
+    font-size: 110%;
+`
 
 export const ClothCardImage = styled.img`
     margin-top: 25px;
     min-height: 200px;
     align-self: center;
-    border: 1px solid black;
     border-radius: 15px;
     z-index: 1;
     opacity: unset;

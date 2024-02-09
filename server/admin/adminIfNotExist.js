@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const UsersModel = require("../database/user.model");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const { MONGO_URL, PORT = 8080 , ADMIN_USERNAME, ADMIN_PASSWORD } = process.env;
 

@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 const getNews = async () => {
     try {
-        const response = await fetch("http://localhost:8080/v1/api/news/newest", {
+        const response = await fetch("https://localhost:3443/v1/api/news/newest", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +27,7 @@ const getNews = async () => {
 
 const deleteNew = async (id, token) => {
     try {
-        const response = await fetch(`http://localhost:8080/v1/api/news/${id}/delete`, {
+        const response = await fetch(`https://localhost:3443/v1/api/news/${id}/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

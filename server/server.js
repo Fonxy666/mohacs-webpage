@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const app = express();
 const port = 8080;
 require('dotenv').config();
 const connectDB = require("./connection/mongooseConnect");
 const passport = require("passport");
 require("./middlewares/passport")(passport);
+const https = require('https');
+const path = require('path');
+const fs = require('fs');
+const app = express();
 
 connectDB();
 
@@ -29,6 +32,11 @@ app.use('/', newsRoutes);
 app.use('/', acePokerRoutes);
 app.use('/', jumboPokerRouters);
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+const sslServer = https.createServer({
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem')),
+    minVersion: 'TLSv1.2',
+    ciphers: 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384',
+}, app);
+
+sslServer.listen(3443, () => console.log(`Secure server on port 3443`));
