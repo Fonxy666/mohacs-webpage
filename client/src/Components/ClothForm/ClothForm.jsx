@@ -9,6 +9,7 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     const [image, setImage] = useState(cloth?.image ?? "");
     const [isFormValid, setIsFormValid] = useState(false);
     const [priceError, setPriceError] = useState("");
+    const [nameError, setNameError] = useState("");
 
     useEffect(() => {
         if (audienceOptions.length <= 1) {
@@ -59,13 +60,16 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
     };
 
     useEffect(() => {
-        const isValid = name.trim() !== "" && brand.trim() !== "" && /^\d+$/.test(price.toString().trim()) && audience !== "" && image !== "";
+        const isValid = name.trim() !== "" && name.length <= 16 && brand.trim() !== "" && /^\d+$/.test(price.toString().trim()) && audience !== "" && image !== "";
         setIsFormValid(isValid);
 
         if (!/^\d+$/.test(price.toString().trim()) && price.length > 0) {
             setPriceError("Ár mező csak számot tartalmazhat");
+        } else if (name.length > 16) {
+            setNameError("El fog csúszni!")
         } else {
             setPriceError("");
+            setNameError("");
         }
     }, [name, brand, price, audience, image]);
 
@@ -79,6 +83,11 @@ const EmployeeForm = ({ onSave, onCancel, cloth, audienceOptions }) => {
                     onChange={(e) => setName(e.target.value)}
                     name="name"
                     id="name"/>
+                {nameError && (
+                    <div className="alert alert-danger" role="alert">
+                        {nameError}
+                    </div>
+                )}
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="brand">Márka:</label>
