@@ -40,7 +40,8 @@ export const CLothNamesAndAudiences = styled.h5`
 
 export const ClothCardImage = styled.img`
     margin-top: 25px;
-    min-height: 200px;
+    min-height: 180px;
+    max-width: 150px;
     align-self: center;
     border-radius: 15px;
     z-index: 1;

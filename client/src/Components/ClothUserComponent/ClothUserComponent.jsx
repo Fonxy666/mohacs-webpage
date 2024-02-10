@@ -186,19 +186,20 @@ const ClothUserComponent = ({ elements, url }) => {
                                 className="card text-black shadow-lg bg-body rounded"
                                 style={{ animationDelay: `${index * 0.2}s` }}>
                                 <StyledDiv>
-                                <ClothCardImage
-                                    src={element.image}
-                                    className="card-img-top"
-                                    alt={element.name}/>
-                                <div className="card-body pb 5">
-                                    <div className="text-center">
-                                        <CLothNamesAndAudiences className="card-title">{element.audience} {element.name}</CLothNamesAndAudiences>
-                                        <p className="text-muted mb-4">{element.brand}</p>
+                                    <ClothCardImage
+                                        src={element.image}
+                                        className="card-img-top"
+                                        alt={element.name}/>
+                                    <div className="card-body">
+                                        <div className="text-center">
+                                            <CLothNamesAndAudiences className="card-title">{element.audience}</CLothNamesAndAudiences>
+                                            <p className="text-muted">{element.name}</p>
+                                            <p className="text-muted" style={{marginTop: "-10px"}}>{element.brand}</p>
+                                            <div className="d-flex justify-content-between total font-weight-bold" style={{marginTop: "-10px"}}>
+                                                <span className="ms-auto">{splitPrice(element.price)}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="d-flex justify-content-between total font-weight-bold mt-4">
-                                        <span className="ms-auto mb-2" style={{marginTop: "-15px"}}>{splitPrice(element.price)}</span>
-                                    </div>
-                                </div>
                                 </StyledDiv>
                             </ClothCard>
                         </ClothCardContainer>
