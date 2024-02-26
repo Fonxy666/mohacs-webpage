@@ -1,6 +1,6 @@
 exports.getClothes = async (req, res, dataModel, logText) => {
     try {
-        const clothes = await dataModel.find({});
+        const clothes = await dataModel.find({}).sort({ date: -1});
         res.json(clothes);
     } catch (error) {
         console.error(error);
