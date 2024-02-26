@@ -1,3 +1,6 @@
+# production
+poker-ruha.hu
+
 # .env file
 In the first, you need to create a .env file in the server folder, to be able to run the CreateAdminIfNotExist and of course the server and the client,too.
 Variables you need in the .env:
