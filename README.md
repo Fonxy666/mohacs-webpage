@@ -1,5 +1,6 @@
 # Status - Production
-see the link for a quick review: https://poker-ruha.hu
+Visit the link for a quick review: https://poker-ruha.hu
+The page was created for my cousin, who is uploading new clothes every day. The shops are located in Mohacs, feel free to call them and visit their shops!
 
 # Stack
 The frontend was developed using React, the backend was implemented with Node.js, and the database is MongoDB.
